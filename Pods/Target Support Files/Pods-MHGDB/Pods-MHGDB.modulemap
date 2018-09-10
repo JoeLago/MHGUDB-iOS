@@ -1,0 +1,6 @@
+framework module Pods_MHGDB {
+  umbrella header "Pods-MHGDB-umbrella.h"
+
+  export *
+  module * { export * }
+}
