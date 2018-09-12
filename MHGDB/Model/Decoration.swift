@@ -10,7 +10,7 @@ import GRDB
 class Decoration: RowConvertible {
     var id: Int
     var name: String
-    var iconName: String?
+    var icon: Icon?
     var slots: Int
     let buy: Int
     let sell: Int
@@ -30,7 +30,7 @@ class Decoration: RowConvertible {
     required init(row: Row) {
         id = row["_id"]
         name = row["name"]
-        iconName = row["icon_name"]
+        icon = Icon(row: row)
         slots = row["num_slots"]
         buy = row["buy"]
         sell = row["sell"]
@@ -52,14 +52,14 @@ class DecorationSkillTree: RowConvertible {
 class DecorationComponent: RowConvertible {
     var componentId: Int
     var name: String
-    var icon: String
+    var icon: Icon?
     var type: String
     var quantity: Int
     
     required init(row: Row) {
         componentId = row["componentid"]
         name = row["componentname"]
-        icon = row["componenticon"]
+        icon = Icon(row: row, prefix: "component")
         type = row["componenttype"]
         quantity = row["quantity"]
     }
@@ -91,7 +91,7 @@ extension Database {
     func decorationComponent(decorationId: Int) -> [DecorationComponent] {
         let query = "SELECT *,"
             + " component.name AS componentname,"
-            + " component.icon_name AS componenticon,"
+            + Icon.iconQueryAttributes(table: "component", prefix: "component") + ","
             + " components.type AS componenttype,"
             + " component._id AS componentid"
             + " FROM components"

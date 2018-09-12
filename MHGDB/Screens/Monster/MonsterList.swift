@@ -51,5 +51,4 @@ class MonsterList: DetailController {
 
 extension Monster: DetailCellModel {
     var primary: String? { return name }
-    //var imageName: String? { return icon }
 }

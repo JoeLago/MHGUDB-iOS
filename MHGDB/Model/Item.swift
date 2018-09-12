@@ -59,7 +59,7 @@ class Item: RowConvertible {
 class ItemQuest: RowConvertible {
     let questId: Int
     let name: String
-    let icon: String?
+    let icon: Icon?
     let quantity: Int
     let chance: Int
     let slot: String
@@ -68,7 +68,7 @@ class ItemQuest: RowConvertible {
     
     required init(row: Row) {
         questId = row["questid"]
-        icon = nil
+        icon = Icon(name: row["questicon_name"])
         name = row["questname"]
         quantity = row["stack_size"]
         chance = row["percentage"]
@@ -81,7 +81,7 @@ class ItemQuest: RowConvertible {
 class ItemLocation: RowConvertible {
     var id: Int
     var name: String
-    var icon: String
+    var icon: Icon?
     var rank: String // TODO: use enum
     var area: String
     var site: String
@@ -98,7 +98,7 @@ class ItemLocation: RowConvertible {
     required init(row: Row) {
         id = row["location_id"]
         name = row["locationname"]
-        icon = row["map"]
+        icon = Icon(name: row["map"])
         rank = row["rank"]
         area = row["area"]
         site = row["site"]
@@ -114,7 +114,7 @@ class ItemMonster: RowConvertible {
     let id: Int
     let monsterId: Int
     let name: String
-    let icon: String
+    let icon: Icon?
     let condition: String
     let rank: Quest.Rank
     let stack: Int
@@ -124,7 +124,7 @@ class ItemMonster: RowConvertible {
         id = row["_id"]
         monsterId = row["monsterid"]
         name = row["monstername"]
-        icon = row["monstericon"]
+        icon = Icon(name: row["monstericon"])
         condition = row["condition"]
         rank = (row["rank"] as String == "LR") ? .low : .high
         stack = row["stack_size"]

@@ -36,12 +36,10 @@ extension Skill: DetailCellModel {
     var primary: String? { return name }
     var subtitle: String? { return description }
     var secondary: String? { return "\(points)" }
-    //var imageName: String? { return nil }
 }
 
 extension SkillItem: DetailCellModel {
     var primary: String? { return name }
     var subtitle: String? { return nil }
     var secondary: String? { return "\(points)" }
-    //var imageName: String? { return icon }
 }

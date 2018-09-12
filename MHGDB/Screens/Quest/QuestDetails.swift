@@ -37,13 +37,10 @@ class QuestDetails: DetailController, DetailScreen {
 extension QuestMonster: DetailCellModel {
     var primary: String? { return name }
     var subtitle: String? { return locations }
-    //var imageName: String? { return icon }
 }
 
 extension QuestReward: DetailCellModel {
-    // Add quantity somewhere
-    var primary: String? { return name }
+    var primary: String? { return name + (quantity > 0 ? " \(quantity)" : "") }
     var subtitle: String? { return nil }
     var secondary: String? { return "\(Int(chance))%" }
-    //var imageName: String? { return icon }
 }

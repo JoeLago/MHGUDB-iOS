@@ -18,5 +18,4 @@ extension PalicoWeapon: DetailCellModel {
     var primary: String? { return name }
     var subtitle: String? { return nil }
     var secondary: String? { return nil }
-    //var imageName: String? { return icon }
 }

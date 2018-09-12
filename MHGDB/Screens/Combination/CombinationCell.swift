@@ -54,17 +54,17 @@ class CombinationCell: CustomCell<CombinationCellModel> {
     
     func populate(combo: CombinationCellModel) {
         resultView.set(id: combo.combination.createdId,
-                       iconImage: combo.combination.createdIcon,
+                       icon: combo.combination.createdIcon,
                        name: combo.combination.createdName,
                        selected: combo.itemSelected)
         
         item1View.set(id: combo.combination.firstId,
-                      iconImage: combo.combination.firstIcon,
+                      icon: combo.combination.firstIcon,
                       name: combo.combination.firstName,
                       selected: combo.itemSelected)
         
         item2View.set(id: combo.combination.secondId,
-                      iconImage: combo.combination.secondIcon,
+                      icon: combo.combination.secondIcon,
                       name: combo.combination.secondName,
                       selected: combo.itemSelected)
     }
@@ -73,7 +73,7 @@ class CombinationCell: CustomCell<CombinationCellModel> {
 class IconImage: UIStackView {
     var id: Int?
     let label = UILabel()
-    let icon = UIImageView()
+    let imageView = UIImageView()
     var selected: ((Int) -> Void)?
     
     init() {
@@ -84,15 +84,15 @@ class IconImage: UIStackView {
         label.font = Font.title
         
         let iconWrapper = UIView()
-        iconWrapper.addSubview(icon)
+        iconWrapper.addSubview(imageView)
         addArrangedSubview(iconWrapper)
         addArrangedSubview(label)
         
-        icon.centerYAnchor.constraint(equalTo: iconWrapper.centerYAnchor).isActive = true
-        icon.matchParent(top: nil, left: 0, bottom: nil, right: 0)
-        icon.matchParent(top: 0, left: nil, bottom: 0, right: nil, relatedBy: .greaterThanOrEqual)
-        icon.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        icon.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: iconWrapper.centerYAnchor).isActive = true
+        imageView.matchParent(top: nil, left: 0, bottom: nil, right: 0)
+        imageView.matchParent(top: 0, left: nil, bottom: 0, right: nil, relatedBy: .greaterThanOrEqual)
+        imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         addGestureRecognizer(tapGesture)
@@ -101,10 +101,14 @@ class IconImage: UIStackView {
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func set(id: Int?, iconImage: String?, name: String, selected: ((Int) -> Void)? = nil) {
+
+    func set(id: Int?, imageName: String?, name: String, selected: ((Int) -> Void)? = nil) {
+        set(id: id, icon: imageName.map({ Icon(name: $0) }) ?? nil, name: name, selected: selected)
+    }
+
+    func set(id: Int?, icon: Icon?, name: String, selected: ((Int) -> Void)? = nil) {
         self.id = id
-        icon.image = UIImage(named: iconImage ?? "")
+        imageView.image = UIImage.with(icon: icon)
         label.text = name
         self.selected = selected
     }

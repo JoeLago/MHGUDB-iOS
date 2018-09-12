@@ -22,7 +22,7 @@ class PalicoWeapon: RowConvertible {
     
     var id: Int
     var name: String
-    var iconName: String?
+    var icon: Icon?
     var description: String
     var attackMelee: Int
     var attackRanged: Int
@@ -56,7 +56,6 @@ class PalicoWeapon: RowConvertible {
     }
     var creationCost: Int
     
-    
     lazy var components: [Component] = {
         return Database.shared.components(itemId: self.id)
     }()
@@ -64,7 +63,7 @@ class PalicoWeapon: RowConvertible {
     required init(row: Row) {
         id = row["_id"]
         name = row["name"]
-        iconName = row["icon_name"]
+        icon = Icon(name: row["icon_name"], rarity: row["rarity"])
         description = row["description"]
         attackMelee = row["attack_melee"]
         attackRanged = row["attack_ranged"]
@@ -87,16 +86,19 @@ extension Database {
     func palicoWeapon(id: Int) -> PalicoWeapon {
         let query = "SELECT * FROM palico_weapons LEFT JOIN items on palico_weapons._id = items._id"
             + " WHERE palico_weapons._id = \(id)"
+            + " ORDER BY rarity"
         return fetch(query)[0]
     }
     
     func palicoWeapons() -> [PalicoWeapon] {
         let query = "SELECT * FROM palico_weapons LEFT JOIN items on palico_weapons._id = items._id"
+            + " ORDER BY rarity"
         return fetch(query)
     }
     
     func palicoWeapons(_ search: String) -> [PalicoWeapon] {
         let query = "SELECT * FROM palico_weapons LEFT JOIN items on palico_weapons._id = items._id"
+            + " ORDER BY rarity"
         return fetch(select: query, search: search)
     }
 }

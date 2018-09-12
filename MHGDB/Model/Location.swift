@@ -10,7 +10,7 @@ import GRDB
 class Location: RowConvertible {
     var id: Int
     var name: String
-    var iconName: String?
+    var icon: Icon?
     
     lazy var monsters: [LocationMonster] = {
         return Database.shared.locationMonsters(locationId: self.id)
@@ -35,14 +35,14 @@ class Location: RowConvertible {
     required init(row: Row) {
         id = row["_id"]
         name = row["name"]
-        iconName = row["map"]
+        icon = Icon(name: row["map"])
     }
 }
 
 class LocationMonster : RowConvertible {
     let monsterId: Int
     let monster: String?
-    let icon: String?
+    let icon: Icon?
     let startArea: String?
     let moneArea: String?
     let restArea: String?
@@ -56,7 +56,7 @@ class LocationMonster : RowConvertible {
     required init(row: Row) {
         monsterId = row["monsterid"]
         monster = row["monstername"]
-        icon = row["monstericon"]
+        icon = Icon(name: row["monstericon"])
         startArea = row["start_area"]
         moneArea = row["move_area"]
         restArea = row["rest_area"]
@@ -66,7 +66,7 @@ class LocationMonster : RowConvertible {
 class LocationItem : RowConvertible {
     var itemId: Int
     var name: String?
-    var iconName: String?
+    var icon: Icon?
     var rank: String?
     var area: String?
     var site: String?
@@ -87,7 +87,7 @@ class LocationItem : RowConvertible {
     required init(row: Row) {
         itemId = row["itemid"]
         name = row["itemname"]
-        iconName = row["itemicon"]
+        icon = Icon(row: row)
         rank = row["rank"]
         area = row["area"]
         site = row["site"]
@@ -127,7 +127,7 @@ extension Database {
     func locationItems(locationId: Int, rank: Quest.Rank) -> [LocationItem] {
         let query = "SELECT *"
             + " ,items.name AS itemname,"
-            + " items.icon_name AS itemicon,"
+            + Icon.iconQueryAttributes() + ","
             + " items._id AS itemid"
             + " FROM gathering"
             + " LEFT JOIN items on gathering.item_id = items._id"

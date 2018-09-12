@@ -13,13 +13,13 @@ struct Icon {
     let name: String
     let color: Color?
 
-    static func iconQueryAttributes(table: String = "items") -> String {
-        return " \(table).icon_name as icon_name, \(table).icon_color as icon_color"
+    public static func iconQueryAttributes(table: String = "items", prefix: String = "") -> String {
+        return " \(table).icon_name as \(prefix)icon_name, \(table).icon_color as \(prefix)icon_color"
     }
 
-    init(row: Row) {
-        name = row["icon_name"] ?? "icon_quest_mark"
-        color = Color(rawValue: row["icon_color"]) ?? .white
+    init(row: Row, prefix: String = "") {
+        name = row["\(prefix)icon_name"] ?? "icon_quest_mark"
+        color = Color(rawValue: row["\(prefix)icon_color"]) ?? .white
     }
 
     init?(name: String?, colorType: Int) {

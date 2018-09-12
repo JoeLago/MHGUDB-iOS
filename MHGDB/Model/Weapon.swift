@@ -34,41 +34,41 @@ class Weapon: RowConvertible {
         
         var imagePrefix: String {
             switch self {
-            case .greatSword: return "great_sword"
-            case .longSword: return "long_sword"
-            case .swordAndShield: return "sword_and_shield"
-            case .dualBlades: return "dual_blades"
-            case .hammer: return "hammer"
-            case .huntingHorm: return "hunting_horn"
-            case .lance: return "lance"
-            case .gunlance: return "gunlance"
-            case .switchAxe: return "switch_axe"
-            case .chargeBlade: return "charge_blade"
-            case .insectGlaive: return "insect_glaive"
-            case .lightBowgun: return "light_bowgun"
-            case .heavyBowgun: return "heavy_bowgun"
-            case .bow: return "bow"
+            case .greatSword: return "icon_great_sword"
+            case .longSword: return "icon_long_sword"
+            case .swordAndShield: return "icon_sword_and_shield"
+            case .dualBlades: return "icon_dual_blades"
+            case .hammer: return "icon_hammer"
+            case .huntingHorm: return "icon_hunting_horn"
+            case .lance: return "icon_lance"
+            case .gunlance: return "icon_gunlance"
+            case .switchAxe: return "icon_switch_axe"
+            case .chargeBlade: return "icon_charge_blade"
+            case .insectGlaive: return "icon_insect_glaive"
+            case .lightBowgun: return "icon_light_bowgun"
+            case .heavyBowgun: return "icon_heavy_bowgun"
+            case .bow: return "icon_bow"
             case .unknown: return ""
             }
         }
         
-        var imageName: String {
+        var icon: Icon? {
             switch self {
-            case .greatSword: return "great_sword8.png"
-            case .longSword: return "long_sword2.png"
-            case .swordAndShield: return "sword_and_shield3.png"
-            case .dualBlades: return "dual_blades4.png"
-            case .hammer: return "hammer5.png"
-            case .huntingHorm: return "hunting_horn6.png"
-            case .lance: return "lance7.png"
-            case .gunlance: return "gunlance8.png"
-            case .switchAxe: return "switch_axe9.png"
-            case .chargeBlade: return "charge_blade10.png"
-            case .insectGlaive: return "insect_glaive2.png"
-            case .lightBowgun: return "light_bowgun3.png"
-            case .heavyBowgun: return "heavy_bowgun4.png"
-            case .bow: return "bow5.png"
-            case .unknown: return ""
+            case .greatSword: return Icon(name: self.imagePrefix, color: .rare8)
+            case .longSword: return Icon(name: self.imagePrefix, color: .rare2)
+            case .swordAndShield: return Icon(name: self.imagePrefix, color: .rare3)
+            case .dualBlades: return Icon(name: self.imagePrefix, color: .rare4)
+            case .hammer: return Icon(name: self.imagePrefix, color: .rare5)
+            case .huntingHorm: return Icon(name: self.imagePrefix, color: .rare6)
+            case .lance: return Icon(name: self.imagePrefix, color: .rare7)
+            case .gunlance: return Icon(name: self.imagePrefix, color: .rare8)
+            case .switchAxe: return Icon(name: self.imagePrefix, color: .rare9)
+            case .chargeBlade: return Icon(name: self.imagePrefix, color: .rare10)
+            case .insectGlaive: return Icon(name: self.imagePrefix, color: .rare2)
+            case .lightBowgun: return Icon(name: self.imagePrefix, color: .rare3)
+            case .heavyBowgun: return Icon(name: self.imagePrefix, color: .rare4)
+            case .bow: return Icon(name: self.imagePrefix, color: .rare5)
+            case .unknown: return nil
             }
         }
     }
@@ -76,8 +76,8 @@ class Weapon: RowConvertible {
     var id: Int
     var parentId: Int?
     var name: String
-    var iconName: String? {
-        return "\(type.imagePrefix)\(rarity).png"
+    var icon: Icon? {
+        return Icon(name: type.imagePrefix, rarity: rarity)
     }
     var type: WType
     var depths: [Bool]?
@@ -191,21 +191,6 @@ class Weapon: RowConvertible {
     }
     
     var coatingImageNames: [String]? {
-        /* TODO:
-         (TextView)view.findViewById(R.id.power_1_text),
-         (TextView)view.findViewById(R.id.power_2_text),
-         (TextView)view.findViewById(R.id.element_1_text),
-         (TextView)view.findViewById(R.id.element_2_text),
-         (TextView)view.findViewById(R.id.crange_text),
-         (TextView)view.findViewById(R.id.poison_text),
-         (TextView)view.findViewById(R.id.para_text),
-         (TextView)view.findViewById(R.id.sleep_text),
-         (TextView)view.findViewById(R.id.exhaust_text),
-         (TextView)view.findViewById(R.id.blast_text),
-         (TextView)view.findViewById(R.id.paint_text)
-         
-         missing yellowgreen, slime, pink, green, empty
-         */
         if let coatings = Int(coatings) {
             var coatingImageNames = [String]()
             

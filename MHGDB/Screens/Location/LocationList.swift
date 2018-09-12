@@ -16,5 +16,4 @@ class LocationList: DetailController {
 
 extension Location: DetailCellModel {
     var primary: String? { return name }
-    //var imageName: String? { return icon }
 }

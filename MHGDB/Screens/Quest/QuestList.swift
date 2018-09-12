@@ -84,5 +84,4 @@ extension Quest: DetailCellModel {
     var primary: String? { return name }
     var subtitle: String? { return goal }
     var secondary: String? { return progression?.text == "Normal" ? "" : progression?.text }
-    //var imageName: String? { return icon }
 }

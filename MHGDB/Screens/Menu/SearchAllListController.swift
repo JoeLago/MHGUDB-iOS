@@ -101,7 +101,6 @@ class SearchAllListController: DetailController  {
 
 extension Weapon: DetailCellModel {
     var primary: String? { return name }
-    //var imageName: String? { return icon }
 }
 
 extension SearchAllListController: UISearchResultsUpdating {

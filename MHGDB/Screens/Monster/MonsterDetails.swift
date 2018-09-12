@@ -45,7 +45,6 @@ class MonsterDetails: DetailController, DetailScreen {
 
 extension MonsterReward: DetailCellModel {
     var primary: String? { return name + (stackSize ?? 0 > 1 ? " x\(stackSize ?? 0)": "") }
-    //var imageName: String? { return icon }
     var secondary: String? { return "\(Int(chance ?? 0))%" }
 }
 

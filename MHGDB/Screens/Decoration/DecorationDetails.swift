@@ -35,6 +35,5 @@ extension DecorationSkillTree: DetailCellModel {
 
 extension DecorationComponent: DetailCellModel {
     var primary: String? { return name }
-    //var imageName: String? { return icon }
     var secondary: String? { return "x \(quantity)" }
 }

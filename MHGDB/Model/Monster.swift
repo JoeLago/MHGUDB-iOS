@@ -153,7 +153,7 @@ class Weaknesses: Elements, RowConvertible {
 class MonsterQuest: RowConvertible {
     var questId: Int
     var questName: String?
-    var questIcon: String?
+    var icon: Icon?
     var goal: String?
     var hub: String
     var stars: Int
@@ -165,7 +165,7 @@ class MonsterQuest: RowConvertible {
         questName = row["questname"]
         stars = row["stars"]
         hub = row["hub"]
-        questIcon = row["icon_name"]
+        icon = Icon(name: row["icon_name"])
         goal = row["goal"]
         goalType = Quest.Goal(row["goal_type"])
         progression = Quest.Progression(Int(row["type"] as String))

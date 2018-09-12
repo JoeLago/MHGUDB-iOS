@@ -49,13 +49,13 @@ class Skill: RowConvertible {
 class SkillItem: RowConvertible {
     let itemId: Int
     let name: String
-    let icon: String
+    let icon: Icon?
     let points: Int
     
     required init(row: Row) {
         itemId = row["itemid"]
         name = row["itemname"]
-        icon = row["itemicon"]
+        icon = Icon(name: row["icon_name"], rarity: row["rarity"])
         points = row["point_value"]
     }
 }
@@ -87,7 +87,7 @@ extension Database {
         var query = "SELECT *,"
             + " items._id AS itemid,"
             + " items.name AS itemname,"
-            + " items.icon_name AS itemicon"
+            + Icon.iconQueryAttributes()
             + " FROM \(table)"
             + " LEFT JOIN item_to_skill_tree ON \(table)._id = item_to_skill_tree.item_id"
             + " LEFT JOIN items ON item_to_skill_tree.item_id = items._id"

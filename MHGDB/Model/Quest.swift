@@ -157,7 +157,7 @@ class Quest: RowConvertible {
 class QuestReward: RowConvertible {
     let itemId: Int
     var name: String
-    var iconName: Icon?
+    var icon: Icon?
     var quantity: Int
     var chance: Int
     var slot: String
@@ -165,7 +165,7 @@ class QuestReward: RowConvertible {
     required init(row: Row) {
         itemId = row["itemid"]
         name = row["itemname"]
-        iconName = Icon(name: row["itemicon"])
+        icon = Icon(row: row)
         quantity = row["quantity"] ?? 0
         chance = row["percentage"] ?? 0
         slot = row["reward_slot"]
@@ -181,12 +181,12 @@ class QuestMonster: RowConvertible {
     var locations: String {
       return [startArea, moveArea, restArea].compactMap{ $0 }.joined(separator: " > ")
     }
-    let icon: String?
+    let icon: Icon?
     
     required init(row: Row) {
         monsterId = row["monsterid"]
         name = row["monstername"]
-        icon = row["monstericon"]
+        icon = Icon(name: row["monstericon"])
         startArea = row["start_area"]
         moveArea = row["move_area"]
         restArea = row["rest_area"]
@@ -250,10 +250,12 @@ extension Database {
     var rewardsQuery: String {
         return "SELECT *,"
             + " items._id AS itemid,"
-            + " items.name AS itemname,"
             + " items._id AS itemid,"
-            + " items.icon_name AS itemicon,"
+            + " items.name AS itemname,"
+            + Icon.iconQueryAttributes() + ","
+            + " items.icon_name AS itemicon_name,"
             + " quests.name AS questname,"
+            + " quests.icon_name AS questicon_name,"
             + " quests._id AS questid"
             + " FROM quest_rewards"
             + " LEFT JOIN items on quest_rewards.item_id = items._id"

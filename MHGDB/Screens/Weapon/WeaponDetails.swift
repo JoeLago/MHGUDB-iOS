@@ -45,5 +45,4 @@ extension Component: DetailCellModel {
     var primary: String? { return name }
     var subtitle: String? { return type }
     var secondary: String? { return "x \(quantity)" }
-    //var imageName: String? { return icon }
 }
