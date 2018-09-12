@@ -28,7 +28,7 @@ struct Color {
         static let green = UIColor.green
         static let blue = UIColor.blue
         static let white = UIColor.white
-        static let purple = UIColor.purple
+        static let purple = UIColor(hex: 0xA020F0)
     }
     
     static func setDefaults() {

@@ -7,7 +7,7 @@
 import Foundation
 
 class Sharpness {
-    static let max = 40.0
+    static let max = 45.0
     
     var red = 0
     var orange = 0
@@ -41,6 +41,6 @@ class Sharpness {
         green = Int(components[3]) ?? 0
         blue = Int(components[4]) ?? 0
         white = Int(components[5]) ?? 0
-        //purple = Int(components[6]) ?? 0
+        purple = Int(components[6]) ?? 0
     }
 }

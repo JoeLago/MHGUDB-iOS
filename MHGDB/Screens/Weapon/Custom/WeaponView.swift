@@ -121,7 +121,7 @@ class WeaponView: TreeCellView<Weapon> {
             formatStrings: ["H:|-[primary]-(>=pad)-[sharpness(==sharpnessWidth)]-|",
                             "H:|-[subtitle(==primary)]-(>=pad)-[slots(==sharpness)]-|",
                             "V:|-(smallPad)-[primary]-(smallPad)-[subtitle]-(smallPad)-|",
-                            "V:|-(smallPad)-[sharpness]-(slotsPad)-[slots]-(slotsPad)-|"],
+                            "V:|-(smallPad)-[sharpness(==sharpnessHeight)]-(slotsPad)-[slots]-(slotsPad)-|"],
             views: [
                 "primary": primaryTextLabel,
                 "subtitle": subtitleTextLabel,
@@ -130,9 +130,10 @@ class WeaponView: TreeCellView<Weapon> {
             ],
             metrics: [
                 "sharpnessWidth": 75,
+                "sharpnessHeight": 23,
                 "slotsPad": 3,
                 "smallPad": 3,
-                "pad": 6
+                "pad": 6,
             ])
         
         //alternateLabel.matchParent()
