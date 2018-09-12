@@ -343,6 +343,39 @@
 		14C60ED62146A63700055E4B /* monster_hornetaur.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C60DE02146A63600055E4B /* monster_hornetaur.png */; };
 		14C60ED82146E65E00055E4B /* Image+Tinting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C60ED72146E65E00055E4B /* Image+Tinting.swift */; };
 		14C60EDA2146F5BD00055E4B /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C60ED92146F5BD00055E4B /* Icon.swift */; };
+		14C611382149658A00055E4B /* Blastblight.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611172149658A00055E4B /* Blastblight.png */; };
+		14C611392149658A00055E4B /* jump.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611182149658A00055E4B /* jump.png */; };
+		14C6113A2149658A00055E4B /* Webbed.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611192149658A00055E4B /* Webbed.png */; };
+		14C6113B2149658A00055E4B /* mount.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C6111A2149658A00055E4B /* mount.png */; };
+		14C6113C2149658A00055E4B /* Thunder.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C6111B2149658A00055E4B /* Thunder.png */; };
+		14C6113D2149658A00055E4B /* Sleep.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C6111C2149658A00055E4B /* Sleep.png */; };
+		14C6113E2149658A00055E4B /* Fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C6111D2149658A00055E4B /* Fire.png */; };
+		14C6113F2149658A00055E4B /* Stun.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C6111E2149658A00055E4B /* Stun.png */; };
+		14C611402149658A00055E4B /* StatusEffect-Ice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14C6111F2149658A00055E4B /* StatusEffect-Ice.jpg */; };
+		14C611412149658A00055E4B /* StatusEffect-Fire.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14C611202149658A00055E4B /* StatusEffect-Fire.jpg */; };
+		14C611422149658A00055E4B /* Status_Effect-Iceblight_MH4_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611212149658A00055E4B /* Status_Effect-Iceblight_MH4_Icon.png */; };
+		14C611432149658A00055E4B /* Dragon.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611222149658A00055E4B /* Dragon.png */; };
+		14C611442149658A00055E4B /* Slime.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611232149658A00055E4B /* Slime.png */; };
+		14C611452149658A00055E4B /* unknown.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611242149658A00055E4B /* unknown.png */; };
+		14C611462149658A00055E4B /* StatusEffect-Water.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14C611252149658A00055E4B /* StatusEffect-Water.jpg */; };
+		14C611472149658A00055E4B /* Status_Effect-Waterblight_MH4_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611262149658A00055E4B /* Status_Effect-Waterblight_MH4_Icon.png */; };
+		14C611482149658A00055E4B /* StatusEffect-Thunder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14C611272149658A00055E4B /* StatusEffect-Thunder.jpg */; };
+		14C611492149658A00055E4B /* Poison.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611282149658A00055E4B /* Poison.png */; };
+		14C6114A2149658A00055E4B /* frenzy_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611292149658A00055E4B /* frenzy_up.png */; };
+		14C6114B2149658A00055E4B /* Ice.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C6112A2149658A00055E4B /* Ice.png */; };
+		14C6114C2149658A00055E4B /* Water.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C6112B2149658A00055E4B /* Water.png */; };
+		14C6114D2149658A00055E4B /* bleeding.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C6112C2149658A00055E4B /* bleeding.png */; };
+		14C6114E2149658A00055E4B /* Tarred.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C6112D2149658A00055E4B /* Tarred.png */; };
+		14C6114F2149658A00055E4B /* Paralysis.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C6112E2149658A00055E4B /* Paralysis.png */; };
+		14C611502149658A00055E4B /* Status_Effect-Dragonblight_MH4_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C6112F2149658A00055E4B /* Status_Effect-Dragonblight_MH4_Icon.png */; };
+		14C611512149658A00055E4B /* Status_Effect-Thunderblight_MH4_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611302149658A00055E4B /* Status_Effect-Thunderblight_MH4_Icon.png */; };
+		14C611522149658A00055E4B /* frenzy_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611312149658A00055E4B /* frenzy_down.png */; };
+		14C611532149658A00055E4B /* effectiveness-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611322149658A00055E4B /* effectiveness-2.png */; };
+		14C611542149658A00055E4B /* StatusEffect-Dragon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 14C611332149658A00055E4B /* StatusEffect-Dragon.jpg */; };
+		14C611552149658A00055E4B /* effectiveness-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611342149658A00055E4B /* effectiveness-3.png */; };
+		14C611562149658A00055E4B /* exhaust.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611352149658A00055E4B /* exhaust.png */; };
+		14C611572149658A00055E4B /* Status_Effect-Fireblight_MH4_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611362149658A00055E4B /* Status_Effect-Fireblight_MH4_Icon.png */; };
+		14C611582149658A00055E4B /* effectiveness-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611372149658A00055E4B /* effectiveness-1.png */; };
 		14DF85451EC297E400F9AD1D /* ListGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DF85441EC297E400F9AD1D /* ListGrid.swift */; };
 		14E2B5031EAD2229002A2A89 /* SharpnessesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2B4FE1EAD2229002A2A89 /* SharpnessesView.swift */; };
 		14E2B5041EAD2229002A2A89 /* SharpnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2B4FF1EAD2229002A2A89 /* SharpnessView.swift */; };
@@ -712,6 +745,39 @@
 		14C60DE02146A63600055E4B /* monster_hornetaur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_hornetaur.png; sourceTree = "<group>"; };
 		14C60ED72146E65E00055E4B /* Image+Tinting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Tinting.swift"; sourceTree = "<group>"; };
 		14C60ED92146F5BD00055E4B /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		14C611172149658A00055E4B /* Blastblight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blastblight.png; sourceTree = "<group>"; };
+		14C611182149658A00055E4B /* jump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jump.png; sourceTree = "<group>"; };
+		14C611192149658A00055E4B /* Webbed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Webbed.png; sourceTree = "<group>"; };
+		14C6111A2149658A00055E4B /* mount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mount.png; sourceTree = "<group>"; };
+		14C6111B2149658A00055E4B /* Thunder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thunder.png; sourceTree = "<group>"; };
+		14C6111C2149658A00055E4B /* Sleep.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sleep.png; sourceTree = "<group>"; };
+		14C6111D2149658A00055E4B /* Fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fire.png; sourceTree = "<group>"; };
+		14C6111E2149658A00055E4B /* Stun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stun.png; sourceTree = "<group>"; };
+		14C6111F2149658A00055E4B /* StatusEffect-Ice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "StatusEffect-Ice.jpg"; sourceTree = "<group>"; };
+		14C611202149658A00055E4B /* StatusEffect-Fire.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "StatusEffect-Fire.jpg"; sourceTree = "<group>"; };
+		14C611212149658A00055E4B /* Status_Effect-Iceblight_MH4_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status_Effect-Iceblight_MH4_Icon.png"; sourceTree = "<group>"; };
+		14C611222149658A00055E4B /* Dragon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dragon.png; sourceTree = "<group>"; };
+		14C611232149658A00055E4B /* Slime.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slime.png; sourceTree = "<group>"; };
+		14C611242149658A00055E4B /* unknown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unknown.png; sourceTree = "<group>"; };
+		14C611252149658A00055E4B /* StatusEffect-Water.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "StatusEffect-Water.jpg"; sourceTree = "<group>"; };
+		14C611262149658A00055E4B /* Status_Effect-Waterblight_MH4_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status_Effect-Waterblight_MH4_Icon.png"; sourceTree = "<group>"; };
+		14C611272149658A00055E4B /* StatusEffect-Thunder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "StatusEffect-Thunder.jpg"; sourceTree = "<group>"; };
+		14C611282149658A00055E4B /* Poison.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Poison.png; sourceTree = "<group>"; };
+		14C611292149658A00055E4B /* frenzy_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frenzy_up.png; sourceTree = "<group>"; };
+		14C6112A2149658A00055E4B /* Ice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ice.png; sourceTree = "<group>"; };
+		14C6112B2149658A00055E4B /* Water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Water.png; sourceTree = "<group>"; };
+		14C6112C2149658A00055E4B /* bleeding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bleeding.png; sourceTree = "<group>"; };
+		14C6112D2149658A00055E4B /* Tarred.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tarred.png; sourceTree = "<group>"; };
+		14C6112E2149658A00055E4B /* Paralysis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Paralysis.png; sourceTree = "<group>"; };
+		14C6112F2149658A00055E4B /* Status_Effect-Dragonblight_MH4_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status_Effect-Dragonblight_MH4_Icon.png"; sourceTree = "<group>"; };
+		14C611302149658A00055E4B /* Status_Effect-Thunderblight_MH4_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status_Effect-Thunderblight_MH4_Icon.png"; sourceTree = "<group>"; };
+		14C611312149658A00055E4B /* frenzy_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frenzy_down.png; sourceTree = "<group>"; };
+		14C611322149658A00055E4B /* effectiveness-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "effectiveness-2.png"; sourceTree = "<group>"; };
+		14C611332149658A00055E4B /* StatusEffect-Dragon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "StatusEffect-Dragon.jpg"; sourceTree = "<group>"; };
+		14C611342149658A00055E4B /* effectiveness-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "effectiveness-3.png"; sourceTree = "<group>"; };
+		14C611352149658A00055E4B /* exhaust.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exhaust.png; sourceTree = "<group>"; };
+		14C611362149658A00055E4B /* Status_Effect-Fireblight_MH4_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status_Effect-Fireblight_MH4_Icon.png"; sourceTree = "<group>"; };
+		14C611372149658A00055E4B /* effectiveness-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "effectiveness-1.png"; sourceTree = "<group>"; };
 		14DF85441EC297E400F9AD1D /* ListGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListGrid.swift; sourceTree = "<group>"; };
 		14E2B4FE1EAD2229002A2A89 /* SharpnessesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharpnessesView.swift; sourceTree = "<group>"; };
 		14E2B4FF1EAD2229002A2A89 /* SharpnessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharpnessView.swift; sourceTree = "<group>"; };
@@ -814,6 +880,7 @@
 				14A249701EA9D05300755F6A /* Assets.xcassets */,
 				14A249731EA9D05300755F6A /* databases */,
 				14C60CEA2146A63600055E4B /* icons */,
+				14C611162149658A00055E4B /* icons_monster_info */,
 				14A24D0C1EA9D05400755F6A /* Info.plist */,
 				14A249711EA9D05300755F6A /* LaunchScreen.storyboard */,
 			);
@@ -1335,6 +1402,46 @@
 			path = icons;
 			sourceTree = "<group>";
 		};
+		14C611162149658A00055E4B /* icons_monster_info */ = {
+			isa = PBXGroup;
+			children = (
+				14C611172149658A00055E4B /* Blastblight.png */,
+				14C611182149658A00055E4B /* jump.png */,
+				14C611192149658A00055E4B /* Webbed.png */,
+				14C6111A2149658A00055E4B /* mount.png */,
+				14C6111B2149658A00055E4B /* Thunder.png */,
+				14C6111C2149658A00055E4B /* Sleep.png */,
+				14C6111D2149658A00055E4B /* Fire.png */,
+				14C6111E2149658A00055E4B /* Stun.png */,
+				14C6111F2149658A00055E4B /* StatusEffect-Ice.jpg */,
+				14C611202149658A00055E4B /* StatusEffect-Fire.jpg */,
+				14C611212149658A00055E4B /* Status_Effect-Iceblight_MH4_Icon.png */,
+				14C611222149658A00055E4B /* Dragon.png */,
+				14C611232149658A00055E4B /* Slime.png */,
+				14C611242149658A00055E4B /* unknown.png */,
+				14C611252149658A00055E4B /* StatusEffect-Water.jpg */,
+				14C611262149658A00055E4B /* Status_Effect-Waterblight_MH4_Icon.png */,
+				14C611272149658A00055E4B /* StatusEffect-Thunder.jpg */,
+				14C611282149658A00055E4B /* Poison.png */,
+				14C611292149658A00055E4B /* frenzy_up.png */,
+				14C6112A2149658A00055E4B /* Ice.png */,
+				14C6112B2149658A00055E4B /* Water.png */,
+				14C6112C2149658A00055E4B /* bleeding.png */,
+				14C6112D2149658A00055E4B /* Tarred.png */,
+				14C6112E2149658A00055E4B /* Paralysis.png */,
+				14C6112F2149658A00055E4B /* Status_Effect-Dragonblight_MH4_Icon.png */,
+				14C611302149658A00055E4B /* Status_Effect-Thunderblight_MH4_Icon.png */,
+				14C611312149658A00055E4B /* frenzy_down.png */,
+				14C611322149658A00055E4B /* effectiveness-2.png */,
+				14C611332149658A00055E4B /* StatusEffect-Dragon.jpg */,
+				14C611342149658A00055E4B /* effectiveness-3.png */,
+				14C611352149658A00055E4B /* exhaust.png */,
+				14C611362149658A00055E4B /* Status_Effect-Fireblight_MH4_Icon.png */,
+				14C611372149658A00055E4B /* effectiveness-1.png */,
+			);
+			path = icons_monster_info;
+			sourceTree = "<group>";
+		};
 		14DF85431EC297DA00F9AD1D /* ListGrid */ = {
 			isa = PBXGroup;
 			children = (
@@ -1467,10 +1574,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				14C60E262146A63700055E4B /* monster_stonefist_hermitaur.png in Resources */,
+				14C6113E2149658A00055E4B /* Fire.png in Resources */,
 				14C60EBB2146A63700055E4B /* icon_trap.png in Resources */,
 				14C60EB62146A63700055E4B /* monster_seltas.png in Resources */,
 				14C60E972146A63700055E4B /* icon_insect_glaive.png in Resources */,
 				14C60EBE2146A63700055E4B /* loc_01.png in Resources */,
+				14C611462149658A00055E4B /* StatusEffect-Water.jpg in Resources */,
 				14C60EA92146A63700055E4B /* icon_great_sword.png in Resources */,
 				14C60E322146A63700055E4B /* icon_seed.png in Resources */,
 				14C60E952146A63700055E4B /* monster_gogmazios.png in Resources */,
@@ -1483,13 +1592,18 @@
 				14C60ED32146A63700055E4B /* icon_charm_stone.png in Resources */,
 				14C60E5B2146A63700055E4B /* monster_great_thunderbug.png in Resources */,
 				14C60EC82146A63700055E4B /* monster_lagombi.png in Resources */,
+				14C6113D2149658A00055E4B /* Sleep.png in Resources */,
 				14C60EC12146A63700055E4B /* monster_shah_dalamadur.png in Resources */,
 				14C60EC92146A63700055E4B /* monster_rustrazor_ceanataur.png in Resources */,
 				14C60EB02146A63700055E4B /* monster_royal_ludroth.png in Resources */,
+				14C6113C2149658A00055E4B /* Thunder.png in Resources */,
 				14C60E0A2146A63700055E4B /* icon_sword_and_shield.png in Resources */,
 				14C60E772146A63700055E4B /* monster_rathalos.png in Resources */,
+				14C6114A2149658A00055E4B /* frenzy_up.png in Resources */,
 				14C60E672146A63700055E4B /* monster_crimson_fatalis.png in Resources */,
+				14C611402149658A00055E4B /* StatusEffect-Ice.jpg in Resources */,
 				14C60E072146A63700055E4B /* monster_bulldrome.png in Resources */,
+				14C611502149658A00055E4B /* Status_Effect-Dragonblight_MH4_Icon.png in Resources */,
 				14C60E492146A63700055E4B /* icon_monster_jewel.png in Resources */,
 				14C60EA02146A63700055E4B /* loc_07.png in Resources */,
 				14C60E7F2146A63700055E4B /* monster_great_maccao.png in Resources */,
@@ -1501,8 +1615,11 @@
 				14C60EC02146A63700055E4B /* monster_malfestio.png in Resources */,
 				14C60E3B2146A63700055E4B /* monster_kelbi.png in Resources */,
 				14C60EA62146A63700055E4B /* monster_nightcloak_malfestio.png in Resources */,
+				14C611422149658A00055E4B /* Status_Effect-Iceblight_MH4_Icon.png in Resources */,
+				14C6113B2149658A00055E4B /* mount.png in Resources */,
 				14C60DF52146A63700055E4B /* icon_mushroom.png in Resources */,
 				14C60ECB2146A63700055E4B /* monster_popo.png in Resources */,
+				14C611582149658A00055E4B /* effectiveness-1.png in Resources */,
 				14C60EAA2146A63700055E4B /* icon_book.png in Resources */,
 				14C60E632146A63700055E4B /* icon_armor.png in Resources */,
 				14C60E362146A63700055E4B /* icon_heavy_bowgun.png in Resources */,
@@ -1524,13 +1641,17 @@
 				14C60ECC2146A63700055E4B /* loc_03.png in Resources */,
 				14C60EA32146A63700055E4B /* monster_ruby_basarios.png in Resources */,
 				14C60E422146A63700055E4B /* monster_gargwa.png in Resources */,
+				14C6113A2149658A00055E4B /* Webbed.png in Resources */,
+				14C611492149658A00055E4B /* Poison.png in Resources */,
 				14C60DEC2146A63700055E4B /* monster_elderfrost_gammoth.png in Resources */,
+				14C611552149658A00055E4B /* effectiveness-3.png in Resources */,
 				14C60DEF2146A63700055E4B /* monster_jaggi.png in Resources */,
 				14C60EB92146A63700055E4B /* monster_shagaru_magala.png in Resources */,
 				14C60E1D2146A63700055E4B /* icon_cutting.png in Resources */,
 				14C60DE32146A63700055E4B /* monster_larinoth.png in Resources */,
 				14C60EAB2146A63700055E4B /* icon_flute.png in Resources */,
 				14C60DE22146A63700055E4B /* monster_zinogre.png in Resources */,
+				14C611572149658A00055E4B /* Status_Effect-Fireblight_MH4_Icon.png in Resources */,
 				14C60E992146A63700055E4B /* loc_12.png in Resources */,
 				14C60ED22146A63700055E4B /* monster_ash_kecha_wacha.png in Resources */,
 				14C60E0F2146A63700055E4B /* icon_knife.png in Resources */,
@@ -1540,8 +1661,10 @@
 				14C60E762146A63700055E4B /* monster_konchu.png in Resources */,
 				14C60DEA2146A63700055E4B /* icon_palico_head.png in Resources */,
 				14C60E1A2146A63700055E4B /* monster_barroth.png in Resources */,
+				14C611512149658A00055E4B /* Status_Effect-Thunderblight_MH4_Icon.png in Resources */,
 				14C60E312146A63700055E4B /* icon_liquid.png in Resources */,
 				14C60EAC2146A63700055E4B /* monster_vespoid.png in Resources */,
+				14C6114F2149658A00055E4B /* Paralysis.png in Resources */,
 				14C60E2A2146A63700055E4B /* monster_bullfango.png in Resources */,
 				14C60E962146A63700055E4B /* monster_brachydios.png in Resources */,
 				14C60E752146A63700055E4B /* monster_deadeye_yian_garuga.png in Resources */,
@@ -1567,9 +1690,13 @@
 				14C60DFA2146A63700055E4B /* loc_18.png in Resources */,
 				14C60DEB2146A63700055E4B /* loc_26.png in Resources */,
 				14C60E7D2146A63700055E4B /* icon_wood.png in Resources */,
+				14C6114E2149658A00055E4B /* Tarred.png in Resources */,
+				14C611522149658A00055E4B /* frenzy_down.png in Resources */,
 				14C60ED02146A63700055E4B /* loc_02.png in Resources */,
 				14C60ED12146A63700055E4B /* monster_yian_kut_ku.png in Resources */,
+				14C611472149658A00055E4B /* Status_Effect-Waterblight_MH4_Icon.png in Resources */,
 				14C60E222146A63700055E4B /* monster_slagtoth.png in Resources */,
+				14C611412149658A00055E4B /* StatusEffect-Fire.jpg in Resources */,
 				14A24D791EA9D05400755F6A /* Assets.xcassets in Resources */,
 				14C60E112146A63700055E4B /* icon_bottle.png in Resources */,
 				14C60E002146A63700055E4B /* monster_emerald_congalala.png in Resources */,
@@ -1582,6 +1709,7 @@
 				14C60E2F2146A63700055E4B /* icon_smoke.png in Resources */,
 				14C60E552146A63700055E4B /* icon_armor_head.png in Resources */,
 				14C60E392146A63700055E4B /* monster_arzuros.png in Resources */,
+				14C611382149658A00055E4B /* Blastblight.png in Resources */,
 				14C60EB52146A63700055E4B /* icon_bomb.png in Resources */,
 				14C60E012146A63700055E4B /* monster_alatreon.png in Resources */,
 				14C60E372146A63700055E4B /* monster_kirin.png in Resources */,
@@ -1604,6 +1732,7 @@
 				14C60EBF2146A63700055E4B /* loc_15.png in Resources */,
 				14C60E022146A63700055E4B /* monster_altaroth.png in Resources */,
 				14C60DF72146A63700055E4B /* monster_velociprey.png in Resources */,
+				14C6114B2149658A00055E4B /* Ice.png in Resources */,
 				14C60ECE2146A63700055E4B /* monster_silverwind_nargacuga.png in Resources */,
 				14C60E452146A63700055E4B /* monster_moofah.png in Resources */,
 				14C60E102146A63700055E4B /* monster_gore_magala.png in Resources */,
@@ -1615,6 +1744,7 @@
 				14C60E9B2146A63700055E4B /* monster_furious_rajang.png in Resources */,
 				14C60DE42146A63700055E4B /* monster_akantor.png in Resources */,
 				14C60EA22146A63700055E4B /* monster_ahtal_ka.png in Resources */,
+				14C6114D2149658A00055E4B /* bleeding.png in Resources */,
 				14C60E2E2146A63700055E4B /* monster_chaotic_gore_magala.png in Resources */,
 				14C60DED2146A63700055E4B /* monster_zamite.png in Resources */,
 				14C60E812146A63700055E4B /* monster_ceanataur.png in Resources */,
@@ -1651,6 +1781,7 @@
 				14C60E412146A63700055E4B /* monster_lavasioth.png in Resources */,
 				14C60E3C2146A63700055E4B /* monster_kecha_wacha.png in Resources */,
 				14C60EA82146A63700055E4B /* icon_blunt.png in Resources */,
+				14C611442149658A00055E4B /* Slime.png in Resources */,
 				14C60E3F2146A63700055E4B /* monster_mizutsune.png in Resources */,
 				14C60E572146A63700055E4B /* monster_raging_brachydios.png in Resources */,
 				14C60E502146A63700055E4B /* monster_blangonga.png in Resources */,
@@ -1663,6 +1794,8 @@
 				14C60DF02146A63700055E4B /* icon_egg.png in Resources */,
 				14C60E9E2146A63700055E4B /* icon_hunting_horn.png in Resources */,
 				14C60E8A2146A63700055E4B /* monster_felyne.png in Resources */,
+				14C611532149658A00055E4B /* effectiveness-2.png in Resources */,
+				14C611542149658A00055E4B /* StatusEffect-Dragon.jpg in Resources */,
 				14C60E192146A63700055E4B /* icon_wyvern_crystal.png in Resources */,
 				14C60DF22146A63700055E4B /* monster_tetsucabra.png in Resources */,
 				14C60E4D2146A63700055E4B /* icon_dual_blades.png in Resources */,
@@ -1696,6 +1829,7 @@
 				14C60E6D2146A63700055E4B /* icon_nectar.png in Resources */,
 				14C60CE92146A62900055E4B /* mhgu.db in Resources */,
 				14C60E032146A63700055E4B /* monster_yian_garuga.png in Resources */,
+				14C611432149658A00055E4B /* Dragon.png in Resources */,
 				14C60E8D2146A63700055E4B /* monster_genprey.png in Resources */,
 				14C60E8F2146A63700055E4B /* icon_long_sword.png in Resources */,
 				14C60ECF2146A63700055E4B /* loc_16.png in Resources */,
@@ -1705,16 +1839,22 @@
 				14A24D7A1EA9D05400755F6A /* LaunchScreen.storyboard in Resources */,
 				14C60E1B2146A63700055E4B /* icon_sphere.png in Resources */,
 				14C60E942146A63700055E4B /* monster_fatalis.png in Resources */,
+				14C611562149658A00055E4B /* exhaust.png in Resources */,
 				14C60E8B2146A63700055E4B /* monster_basarios.png in Resources */,
+				14C611452149658A00055E4B /* unknown.png in Resources */,
 				14C60E702146A63700055E4B /* monster_khezu.png in Resources */,
 				14C60E302146A63700055E4B /* monster_gammoth.png in Resources */,
+				14C611392149658A00055E4B /* jump.png in Resources */,
 				14C60E5D2146A63700055E4B /* icon_boomerang.png in Resources */,
+				14C6114C2149658A00055E4B /* Water.png in Resources */,
 				14C60E342146A63700055E4B /* monster_najarala.png in Resources */,
+				14C611482149658A00055E4B /* StatusEffect-Thunder.jpg in Resources */,
 				14C60E512146A63700055E4B /* monster_aptonoth.png in Resources */,
 				14C60E822146A63700055E4B /* icon_bait.png in Resources */,
 				14C60E9A2146A63700055E4B /* monster_red_khezu.png in Resources */,
 				14C60E5C2146A63700055E4B /* monster_cephadrome.png in Resources */,
 				14C60EB42146A63700055E4B /* loc_10.png in Resources */,
+				14C6113F2149658A00055E4B /* Stun.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,8 +10,7 @@ protocol DetailCellModel {
     var primary: String? { get }
     var subtitle: String? { get }
     var secondary: String? { get }
-    var imageName: String? { get }
-    var tintColor: UIColor? { get }
+    var icon: Icon? { get }
 }
 
 // So that implementation is only required for non nil fields
@@ -19,8 +18,7 @@ extension DetailCellModel {
     var primary: String? { return nil }
     var subtitle: String? { return nil }
     var secondary: String? { return nil }
-    var imageName: String? { return nil }
-    var tintColor: UIColor? { return nil }
+    var icon: Icon? { return nil }
 }
 
 class DetailCell: UITableViewCell {
@@ -54,19 +52,19 @@ class DetailCell: UITableViewCell {
             return
         }
 
-        setIcon(named: model.imageName, tintColor: model.tintColor)
+        setIcon(icon: model.icon)
         primaryTextLabel.text = model.primary
         subtitleTextLabel.text = model.subtitle
         secondaryTextLabel.text = model.secondary
     }
     
-    func setIcon(named: String?, tintColor: UIColor?) {
-        guard let named = named, var image = UIImage(named: named) else {
+    func setIcon(icon: Icon?) {
+        guard let icon = icon, var image = UIImage(named: icon.name) else {
             hideImage()
             return
         }
 
-        if let tintColor = tintColor {
+        if let tintColor = icon.color?.color {
             image = image.tint(tintColor)
         }
 

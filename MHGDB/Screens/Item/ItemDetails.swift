@@ -40,25 +40,25 @@ extension ItemQuest: DetailCellModel {
     var primary: String? { return "\(name) - \(slot)" }
     var subtitle: String? { return "\(stars)\(String.star) \(hub)" }
     var secondary: String? { return "\(quantity > 1 ? "x\(quantity) " : "") \(Int(chance))%" }
-    var imageName: String? { return icon }
+    //var imageName: String? { return icon }
 }
 
 extension ItemLocation: DetailCellModel {
     var primary: String? { return "\(rank) \(name)" }
-    var imageName: String? { return icon }
+    //var imageName: String? { return icon }
     var subtitle: String? { return nodeName }
     var secondary: String? { return "\(stack > 1 ? "x\(stack) ": "")\(Int(chance))%" }
 }
 
 extension ItemMonster: DetailCellModel {
     var primary: String? { return "\(rank.rawValue) \(name)" }
-    var imageName: String? { return icon }
+    //var imageName: String? { return icon }
     var subtitle: String? { return "\(condition)" }
     var secondary: String? { return "\(stack > 1 ? "x\(stack) ": "")\(chance)%" }
 }
 
 extension ItemComponent: DetailCellModel {
     var primary: String? { return name }
-    var imageName: String? { return icon }
+    //var imageName: String? { return icon }
     var secondary: String? { return "x \(quantity)" }
 }

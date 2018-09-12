@@ -10,7 +10,7 @@ import GRDB
 class Location: RowConvertible {
     var id: Int
     var name: String
-    var icon: String?
+    var iconName: String?
     
     lazy var monsters: [LocationMonster] = {
         return Database.shared.locationMonsters(locationId: self.id)
@@ -35,7 +35,7 @@ class Location: RowConvertible {
     required init(row: Row) {
         id = row["_id"]
         name = row["name"]
-        icon = row["map"]
+        iconName = row["map"]
     }
 }
 
@@ -66,7 +66,7 @@ class LocationMonster : RowConvertible {
 class LocationItem : RowConvertible {
     var itemId: Int
     var name: String?
-    var icon: String?
+    var iconName: String?
     var rank: String?
     var area: String?
     var site: String?
@@ -87,7 +87,7 @@ class LocationItem : RowConvertible {
     required init(row: Row) {
         itemId = row["itemid"]
         name = row["itemname"]
-        icon = row["itemicon"]
+        iconName = row["itemicon"]
         rank = row["rank"]
         area = row["area"]
         site = row["site"]

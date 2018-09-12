@@ -22,7 +22,7 @@ class ListGridCell: UICollectionViewCell {
     var model: SimpleCellModel? {
         didSet {
             if let model = model {
-                icon.image = UIImage(named: model.imageName ?? "")
+                icon.image = UIImage(named: model.icon?.name ?? "")
                 label.text = model.text
             }
         }
@@ -65,13 +65,15 @@ class ListGrid: UICollectionViewController {
     }
     
     func addCell(text: String?, imageName: String?, viewControllerBlock: @escaping () -> UIViewController) {
-        cellModels.append(SimpleCellModel(text: text, imageName: imageName) {
+        let icon = Icon(name: imageName)
+        cellModels.append(SimpleCellModel(text: text, icon: icon) {
             self.navigationController?.pushViewController(viewControllerBlock(), animated: true)
         })
     }
     
     func addCell(text: String?, imageName: String?, selectedBlock: @escaping () -> Void = {}) {
-        cellModels.append(SimpleCellModel(text: text, imageName: imageName, selectedBlock: selectedBlock))
+        let icon = Icon(name: imageName)
+        cellModels.append(SimpleCellModel(text: text, icon: icon, selectedBlock: selectedBlock))
     }
     
     required init?(coder aDecoder: NSCoder) {

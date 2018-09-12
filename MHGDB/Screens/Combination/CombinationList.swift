@@ -19,5 +19,5 @@ class CombinationList: DetailController {
 extension Combination: DetailCellModel {
     var primary: String? { return createdName }
     var subtitle: String? { return firstName + " + " + secondName }
-    var imageName: String? { return createdIcon }
+    //var imageName: String? { return createdIcon }
 }

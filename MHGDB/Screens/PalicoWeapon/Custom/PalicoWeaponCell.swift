@@ -38,7 +38,7 @@ class PalicoWeaponCell: CustomCell<PalicoWeapon> {
     }
     
     private func populateCell(weapon: PalicoWeapon) {
-        iconView.image = UIImage(named: weapon.icon ?? "")
+        //iconView.image = UIImage(named: weapon.icon ?? "")
         nameLabel.text = weapon.name
         
         let melee = NSMutableAttributedString(string: "Melee: ")

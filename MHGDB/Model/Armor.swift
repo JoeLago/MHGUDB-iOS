@@ -42,6 +42,16 @@ class Armor: RowConvertible {
         case arms = "Arms"
         case waist = "Waist"
         case legs = "Legs"
+
+        var icon: String {
+            switch self {
+            case .head: return "icon_armor_head.png"
+            case .body: return "icon_armor_body.png"
+            case .arms: return "icon_armor_arms.png"
+            case .waist: return "icon_armor_waist.png"
+            case .legs: return "icon_armor_legs.png"
+            }
+        }
         
         static func forString(_ string: String) -> Slot? {
             switch string {
@@ -61,9 +71,8 @@ class Armor: RowConvertible {
     
     let id: Int
     let name: String
-    var icon: String {
-        let imageName = "\(slot?.rawValue.lowercased() ?? "")\(rarity).png"
-        return imageName
+    var icon: Icon? {
+        return Icon(name: slot?.icon ?? "", rarity: rarity)
     }
     let defense: Int
     let defenseMax: Int
@@ -121,14 +130,14 @@ class ArmorSkill: RowConvertible {
 class ArmorComponent: RowConvertible {
     var itemId: Int
     var name: String
-    var icon: String?
+    var icon: Icon?
     var type: String?
     var quantity: Int?
     
     required init(row: Row) {
         itemId = row["componentid"]
         name = row["componentname"]
-        icon = row["componenticon"]
+        icon = Icon(row: row)
         type = row["componenttype"]
         quantity = row["quantity"]
     }
@@ -172,8 +181,8 @@ extension Database {
         let query = "SELECT"
             + " component._id AS componentid,"
             + " component.name AS componentname,"
-            + " component.icon_name AS componenticon,"
-            + " component.type AS componenttype"
+            + " component.type AS componenttype,"
+            + Icon.iconQueryAttributes(table: "component")
             + " FROM components"
             + " LEFT JOIN items ON components.created_item_id = items._id"
             + " LEFT JOIN items AS component ON components.component_item_id = component._id"

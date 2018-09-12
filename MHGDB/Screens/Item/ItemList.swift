@@ -16,6 +16,4 @@ class ItemList: DetailController {
 
 extension Item: DetailCellModel {
     var primary: String? { return name }
-    var imageName: String? { return icon }
-    var tintColor: UIColor? { return iconColor }
 }

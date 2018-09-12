@@ -9,12 +9,12 @@ import UIKit
 
 class SimpleCellModel {
     var text: String?
-    var imageName: String?
+    var icon: Icon?
     var selectedBlock: () -> Void = {}
     
-    init(text: String?, imageName: String?, selectedBlock: @escaping () -> Void = {}) {
+    init(text: String?, icon: Icon?, selectedBlock: @escaping () -> Void = {}) {
         self.text = text
-        self.imageName = imageName
+        self.icon = icon
         self.selectedBlock = selectedBlock
     }
 }
@@ -30,15 +30,15 @@ class SimpleTableViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addCell(text: String?, imageName: String?, viewControllerBlock: @escaping () -> UIViewController) {
-        cellModels.append(SimpleCellModel(text: text, imageName: imageName) {
+    func addCell(text: String?, icon: Icon?, viewControllerBlock: @escaping () -> UIViewController) {
+        cellModels.append(SimpleCellModel(text: text, icon: icon) {
             self.push(viewController: viewControllerBlock())
         })
     }
     
-    func addCell(text: String?, imageName: String?, selectedBlock: @escaping () -> Void = {}) {
+    func addCell(text: String?, icon: Icon?, selectedBlock: @escaping () -> Void = {}) {
         cellModels.append(SimpleCellModel(text: text,
-                                          imageName: imageName,
+                                          icon: icon,
                                           selectedBlock: selectedBlock))
     }
     
@@ -66,7 +66,7 @@ class SimpleTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let cellModel = cellModels[indexPath.row]
-        cell.imageView?.image = UIImage(named: cellModel.imageName ?? "")
+        cell.imageView?.image = UIImage.with(icon: cellModel.icon)
         cell.textLabel?.text = cellModel.text ?? ""
     }
     

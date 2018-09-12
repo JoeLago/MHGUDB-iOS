@@ -11,7 +11,7 @@ class Quest: RowConvertible {
     var id: Int!
     var name: String?
     var hub: String? // Switch to enum
-    var icon: String?
+    var icon: Icon?
     var goal: String?
     var goalType: Quest.Goal?
     var progression: Quest.Progression?
@@ -137,7 +137,7 @@ class Quest: RowConvertible {
     required init(row: Row) {
         id = row["_id"]
         name = row["name"]
-        icon = row["icon_name"]
+        icon = Icon(name: row["icon_name"])
         goal = row["goal"]
         goalType = Quest.Goal(row["goal_type"]) // TODO enum inferrence
         hub = row["hub"]
@@ -157,7 +157,7 @@ class Quest: RowConvertible {
 class QuestReward: RowConvertible {
     let itemId: Int
     var name: String
-    var icon: String?
+    var iconName: Icon?
     var quantity: Int
     var chance: Int
     var slot: String
@@ -165,7 +165,7 @@ class QuestReward: RowConvertible {
     required init(row: Row) {
         itemId = row["itemid"]
         name = row["itemname"]
-        icon = row["itemicon"]
+        iconName = Icon(name: row["itemicon"])
         quantity = row["quantity"] ?? 0
         chance = row["percentage"] ?? 0
         slot = row["reward_slot"]

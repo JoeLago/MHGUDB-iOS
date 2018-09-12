@@ -23,16 +23,16 @@ class ListMenu: SimpleTableViewController {
             tableView.tableHeaderView = searchController.searchBar
         }
         
-        addCell(text: "Quests", imageName: "Quest-Icon-Red.png") { QuestList() }
-        addCell(text: "Monsters", imageName: "Rathalos.png") { MonsterList() }
-        addCell(text: "Weapons", imageName: "great_sword8.png") { WeaponTypeList() }
-        addCell(text: "Armor", imageName: "body4.png") { ArmorList() }
-        addCell(text: "Items", imageName: "Ore-Purple.png") { ItemList() }
-        addCell(text: "Combinations", imageName: "Liquid-Green.png") { CombinationList() }
-        addCell(text: "Locations", imageName: "Map-Icon-White.png") { LocationList() }
-        addCell(text: "Decorations", imageName: "Jewel-Cyan.png") { DecorationList() }
-        addCell(text: "Skills", imageName: "Monster-Jewel-Teal.png") { SkillList() }
-        addCell(text: "Palico", imageName: "cutting3.png") { PalicoList() }
+        addCell(text: "Quests", icon: Icon(name: "icon_quest.png", color: .red)) { QuestList() }
+        addCell(text: "Monsters", icon: Icon(name: "monster_rathalos.png")) { MonsterList() }
+        addCell(text: "Weapons", icon: Icon(name: "icon_great_sword.png", color: .cyan)) { WeaponTypeList() }
+        addCell(text: "Armor", icon: Icon(name: "icon_armor_body.png", color: .pink)) { ArmorList() }
+        addCell(text: "Items", icon: Icon(name: "icon_ore.png", color: .purple)) { ItemList() }
+        addCell(text: "Combinations", icon: Icon(name: "icon_liquid.png", color: .green)) { CombinationList() }
+        addCell(text: "Locations", icon: Icon(name: "icon_map_icon.png", color: .white)) { LocationList() }
+        addCell(text: "Decorations", icon: Icon(name: "icon_jewel.png", color: .cyan)) { DecorationList() }
+        addCell(text: "Skills", icon: Icon(name: "icon_monster_jewel.png", color: .teal)) { SkillList() }
+        addCell(text: "Palico", icon: Icon(name: "icon_cutting.png", color: .yellow)) { PalicoList() }
     }
     
     override func viewDidAppear(_ animated: Bool) {

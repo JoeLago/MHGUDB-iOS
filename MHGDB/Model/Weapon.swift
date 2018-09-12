@@ -76,7 +76,7 @@ class Weapon: RowConvertible {
     var id: Int
     var parentId: Int?
     var name: String
-    var icon: String? {
+    var iconName: String? {
         return "\(type.imagePrefix)\(rarity).png"
     }
     var type: WType

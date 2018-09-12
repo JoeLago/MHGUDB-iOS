@@ -12,8 +12,8 @@ class MapCell: CustomCell<Location> {
     
     override var model: Location? {
         didSet {
-            if let model = model, let icon = model.icon {
-                mapImageView.image = UIImage(named: icon)
+            if let model = model, let iconName = model.iconName {
+                mapImageView.image = UIImage(named: iconName)
             }
         }
     }

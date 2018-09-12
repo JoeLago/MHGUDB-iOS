@@ -6,9 +6,20 @@
 //  Copyright © 2018 Gathering Hall Studios. All rights reserved.
 //
 
+// https://stackoverflow.com/questions/45327625/changing-the-tint-of-the-image-in-swift
+
 import UIKit
 
 extension UIImage {
+
+    static func with(icon: Icon?) -> UIImage? {
+        guard let icon = icon else { return nil }
+        var image = UIImage(named: icon.name)
+        if let color = icon.color {
+            image = image?.tint(color.color)
+        }
+        return image
+    }
 
     // colorize image with given tint color
     // this is similar to Photoshop's "Color" layer blend mode
@@ -23,11 +34,11 @@ extension UIImage {
             context.fill(rect)
 
             // draw original image
-            context.setBlendMode(blendMode)
+            context.setBlendMode(.normal)
             context.draw(self.cgImage!, in: rect)
 
             // tint image (loosing alpha) - the luminosity of the original image is preserved
-            context.setBlendMode(.multiply)
+            context.setBlendMode(blendMode)
             tintColor.setFill()
             context.fill(rect)
 

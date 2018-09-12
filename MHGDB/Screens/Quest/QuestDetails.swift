@@ -37,7 +37,7 @@ class QuestDetails: DetailController, DetailScreen {
 extension QuestMonster: DetailCellModel {
     var primary: String? { return name }
     var subtitle: String? { return locations }
-    var imageName: String? { return icon }
+    //var imageName: String? { return icon }
 }
 
 extension QuestReward: DetailCellModel {
@@ -45,6 +45,5 @@ extension QuestReward: DetailCellModel {
     var primary: String? { return name }
     var subtitle: String? { return nil }
     var secondary: String? { return "\(Int(chance))%" }
-    var imageName: String? { return icon }
-    var tintColor: UIColor? { return iconColor.color }
+    //var imageName: String? { return icon }
 }

@@ -28,7 +28,7 @@ class Monster: RowConvertible {
     
     var id: Int
     var name: String
-    var icon: String?
+    var icon: Icon?
     var size: Size?
     
     var weaknesses: [Weaknesses] {
@@ -115,7 +115,7 @@ class Monster: RowConvertible {
     required init(row: Row) {
         id = row["_id"]
         name = row["name"]
-        icon = row["icon_name"]
+        icon = Icon(name: row["icon_name"])
         size = Size(Int(row["class"] as String))
     }
 }
@@ -199,7 +199,7 @@ class MonsterReward: RowConvertible {
     
     var itemId: Int
     var name: String
-    var icon: String?
+    var icon: Icon?
     var condition: String
     var rank: Quest.Rank?
     var stackSize: Int?
@@ -208,7 +208,7 @@ class MonsterReward: RowConvertible {
     required init(row: Row) {
         itemId = row["itemid"]
         name = row["name"]
-        icon = row["icon_name"]
+        icon = Icon(row: row)
         condition = row["condition"]
         rank = (row["rank"] as String == "LR") ? .low : .high
         stackSize = row["stack_size"]
@@ -359,7 +359,7 @@ extension Database {
         let query = "SELECT *,"
             + " items._id AS itemid,"
             + " items.name as name,"
-            + " items.icon_name as icon_name"
+            + Icon.iconQueryAttributes()
             + " FROM hunting_rewards"
             + " LEFT JOIN items on hunting_rewards.item_id = items._id"
             + " LEFT JOIN monsters on hunting_rewards.monster_id = monsters._id"

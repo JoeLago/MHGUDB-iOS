@@ -22,7 +22,7 @@ class PalicoWeapon: RowConvertible {
     
     var id: Int
     var name: String
-    var icon: String?
+    var iconName: String?
     var description: String
     var attackMelee: Int
     var attackRanged: Int
@@ -64,7 +64,7 @@ class PalicoWeapon: RowConvertible {
     required init(row: Row) {
         id = row["_id"]
         name = row["name"]
-        icon = row["icon_name"]
+        iconName = row["icon_name"]
         description = row["description"]
         attackMelee = row["attack_melee"]
         attackRanged = row["attack_ranged"]

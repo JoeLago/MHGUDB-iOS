@@ -10,7 +10,7 @@ import GRDB
 class Decoration: RowConvertible {
     var id: Int
     var name: String
-    var icon: String?
+    var iconName: String?
     var slots: Int
     let buy: Int
     let sell: Int
@@ -30,7 +30,7 @@ class Decoration: RowConvertible {
     required init(row: Row) {
         id = row["_id"]
         name = row["name"]
-        icon = row["icon_name"]
+        iconName = row["icon_name"]
         slots = row["num_slots"]
         buy = row["buy"]
         sell = row["sell"]

@@ -35,7 +35,7 @@ extension ArmorSkill: DetailCellModel {
 
 extension ArmorComponent: DetailCellModel {
     var primary: String? { return name }
-    var imageName: String? { return icon }
+    //var imageName: String? { return icon }
     var secondary: String? { return "x \(quantity ?? 0)" }
     // TODO: Do we need this?  Create/Upgrade should get there own sections, armor is only create?
     //var subtitle: String? { return type }

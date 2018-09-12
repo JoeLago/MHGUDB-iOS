@@ -25,7 +25,7 @@ class MonsterStatusesCell: GridCell<Monster> {
                          "exhaust",
                          "mount",
                          "jump",
-                         "BlastBlight"])
+                         "Blastblight"])
         
         for status in monster.statuses {
             let values: [Any] = [status.stat.capitalizingFirstLetter(),

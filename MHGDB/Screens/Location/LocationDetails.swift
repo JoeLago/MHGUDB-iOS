@@ -40,11 +40,11 @@ class LocationDetails: DetailController, DetailScreen {
 extension LocationMonster: DetailCellModel {
     var primary: String? { return monster }
     var subtitle: String? { return areas }
-    var imageName: String? { return icon }
+    //var imageName: String? { return icon }
 }
 
 extension LocationItem: DetailCellModel {
     var primary: String? { return (name ?? "") + (stack ?? 0 > 1 ? " x\(stack ?? 0)": "") }
-    var imageName: String? { return icon }
+    //var imageName: String? { return icon }
     var secondary: String? { return "\(Int(chance ?? 0))%" }
 }
