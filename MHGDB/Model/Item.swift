@@ -136,14 +136,14 @@ class ItemComponent: RowConvertible {
     var id: Int
     var producedId: Int
     var name: String
-    var icon: String
+    var icon: Icon?
     var quantity: Int
     
     required init(row: Row) {
         id = row["itemid"]
         producedId = row["itemid"]
         name = row["createdname"]
-        icon = row["createdicon"]
+        icon = Icon(name: row["createdicon"], rarity: row["createdrarity"])
         quantity = row["quantity"]
     }
 }
@@ -193,6 +193,7 @@ extension Database {
         let query = "SELECT *,"
             + " created.name AS createdname,"
             + " created.icon_name AS createdicon,"
+            + " created.rarity AS createdrarity,"
             + " created._id as itemid"
             + " FROM armor"
             + " LEFT JOIN components ON armor._id = components.created_item_id"
@@ -206,6 +207,7 @@ extension Database {
         let query = "SELECT *,"
             + " created.name AS createdname,"
             + " created.icon_name AS createdicon,"
+            + " created.rarity AS createdrarity,"
             + " created._id as itemid"
             + " FROM weapons"
             + " LEFT JOIN components ON weapons._id = components.created_item_id"
@@ -219,6 +221,7 @@ extension Database {
         let query = "SELECT *,"
             + " created.name AS createdname,"
             + " created.icon_name AS createdicon,"
+            + " created.rarity AS createdrarity,"
             + " created._id as itemid"
             + " FROM decorations"
             + " LEFT JOIN components ON decorations._id = components.created_item_id"
