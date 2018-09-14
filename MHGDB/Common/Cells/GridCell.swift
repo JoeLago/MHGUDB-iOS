@@ -31,12 +31,12 @@ class GridCell<T>: CustomCell<T> {
                            multiplier: 1, constant: 0).isActive = true
     }
     
-    func add(imageNames: [String]) {
-        let attributeStrings = imageNames.map { $0.attributedImage }
+    func add(imageNames: [String?]) {
+        let attributeStrings = imageNames.map { $0?.attributedImage }
         add(values: attributeStrings)
     }
     
-    func add(values: [Any]) {
+    func add(values: [Any?]) {
         if columns.count == 0 {
             for _ in 0 ... values.count - 1 {
                 let column = LabelStack(axis: .vertical)
@@ -47,9 +47,8 @@ class GridCell<T>: CustomCell<T> {
         }
         
         for i in 0 ... columns.count - 1 {
-            let columnStack = columns[i]
             let value = values[i]
-            
+            let columnStack = columns[i]
             columnStack.add(value: value)
         }
     }

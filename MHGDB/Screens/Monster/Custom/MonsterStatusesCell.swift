@@ -17,7 +17,7 @@ class MonsterStatusesCell: GridCell<Monster> {
     }
     
     func populate(monster: Monster) {
-        add(imageNames: ["",
+        add(imageNames: [nil,
                          "Poison",
                          "Sleep",
                          "Paralysis",

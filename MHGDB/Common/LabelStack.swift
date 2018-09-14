@@ -62,7 +62,7 @@ class LabelStack: UIStackView {
         }
     }
     
-    func add(value: Any) {
+    func add(value: Any?) {
         let label = newLabel()
         if showSeparator, count > 0 {
             addTopSeparator(view: label)
