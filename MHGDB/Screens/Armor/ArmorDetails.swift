@@ -45,11 +45,11 @@ extension Resistances: ImageLabelCellProtocol {
     
     var values: [ImageLabelModel] {
         return [
-            ImageLabelModel("Fire.png", fire),
-            ImageLabelModel("Water.png", water),
-            ImageLabelModel("Thunder.png", thunder),
-            ImageLabelModel("Ice.png", ice),
-            ImageLabelModel("Dragon.png", dragon)
+            ImageLabelModel("Fire.png", value: fire),
+            ImageLabelModel("Water.png", value: water),
+            ImageLabelModel("Thunder.png", value: thunder),
+            ImageLabelModel("Ice.png", value: ice),
+            ImageLabelModel("Dragon.png", value: dragon)
         ]
     }
 }

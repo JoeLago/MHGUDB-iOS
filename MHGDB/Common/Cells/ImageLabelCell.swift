@@ -12,12 +12,16 @@ protocol ImageLabelCellProtocol {
 }
 
 struct ImageLabelModel {
-    let imageName: String
+    let icon: Icon
     let value: Int?
     let doShowValue: Bool
     
-    init(_ imageName: String, _ value: Int? = nil, doShowValue: Bool = true) {
-        self.imageName = imageName
+    init(_ imageName: String, value: Int? = nil, doShowValue: Bool = true) {
+        self.init(icon: Icon(name: imageName), value: value, doShowValue: doShowValue)
+    }
+
+    init(icon: Icon, value: Int? = nil, doShowValue: Bool = true) {
+        self.icon = icon
         self.value = value
         self.doShowValue = doShowValue
     }
@@ -34,9 +38,9 @@ class ImageLabelCellModel: ImageLabelCellProtocol {
 }
 
 class ImageLabelCell<T: ImageLabelCellProtocol>: CustomCell<T> {
-    let imgDim: CGFloat = 15
+    let imgDim: CGFloat = 20
     let stateFontSize: CGFloat = 16
-    let valueFontSize: CGFloat = 12
+    let valueFontSize: CGFloat = 14
     
     var labelText: String?
     var attributedText = NSMutableAttributedString()
@@ -101,27 +105,26 @@ class ImageLabelCell<T: ImageLabelCellProtocol>: CustomCell<T> {
             stateLabel.text = imageLabelCellModel.label
             imageLabelCellModel.values.forEach { (model: ImageLabelModel) in
                 if model.doShowValue {
-                    addNonZeroImageValue(imageName: model.imageName, value: model.value)
+                    addNonZeroImageValue(icon: model.icon, value: model.value)
                 } else {
-                    addImageValue(imageName: model.imageName)
+                    addImageValue(icon: model.icon)
                 }
             }
         }
     }
     
-    func addNonZeroImageValue(imageName: String, value: Int?) {
+    func addNonZeroImageValue(icon: Icon, value: Int?) {
         if let value = value, value != 0 {
-            addImageValue(imageName: imageName, value: value)
+            addImageValue(icon: icon, value: value)
         } else if value == nil {
-            addImageValue(imageName: imageName)
+            addImageValue(icon: icon)
         }
     }
     
-    func addImageValue(imageName: String, value: Int? = nil) {
-        let attachment = NSTextAttachment()
-        attachment.image = UIImage(named: imageName)
-        attachment.bounds = CGRect(x: 0, y: -(imgDim/4), width: imgDim, height: imgDim)
-        attributedText.append(NSAttributedString(attachment: attachment))
+    func addImageValue(icon: Icon, value: Int? = nil) {
+        if let attachment = textAttachment(icon: icon, width: imgDim, height: imgDim, fontSize: valueFontSize) {
+            attributedText.append(NSAttributedString(attachment: attachment))
+        }
         
         if let value = value {
             attributedText.append(string: "\(value)")
@@ -130,5 +133,15 @@ class ImageLabelCell<T: ImageLabelCellProtocol>: CustomCell<T> {
         attributedText.append(string: "  ")
         
         valuesLabel.attributedText = attributedText
+    }
+
+    func textAttachment(icon: Icon, width: CGFloat, height: CGFloat, fontSize: CGFloat) -> NSTextAttachment? {
+        guard let image = icon.image else { return nil }
+        let font = UIFont.systemFont(ofSize: fontSize)
+        let textAttachment = NSTextAttachment()
+        textAttachment.image = image
+        let mid = font.descender + font.capHeight
+        textAttachment.bounds = CGRect(x: 0, y: font.descender - height / 2 + mid + 2, width: width, height: height).integral
+        return textAttachment
     }
 }

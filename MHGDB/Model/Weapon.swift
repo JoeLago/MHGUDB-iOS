@@ -170,18 +170,19 @@ class Weapon: RowConvertible {
         }
     }
 
-    var noteImageNames: [String]? {
+    var noteIcons: [Icon]? {
         if let notes = notes {
-          return notes.compactMap({ (c: Character) -> String? in
+          return notes.compactMap({ (c: Character) -> Icon? in
                 switch c {
-                case "A": return "Note.aqua.png"
-                case "B": return "Note.blue.png"
-                case "G": return "Note.green.png"
-                case "O": return "Note.orange.png"
-                case "P": return "Note.purple.png"
-                case "R": return "Note.red.png"
-                case "W": return "Note.white.png"
-                case "Y": return "Note.yellow.png"
+                //case "A": return Icon(name: "icon_music_note", color: .aqua)
+                case "B": return Icon(name: "icon_music_note", color: .darkBlue)
+                case "C": return Icon(name: "icon_music_note", color: .cyan)
+                case "G": return Icon(name: "icon_music_note", color: .darkGreen)
+                case "O": return Icon(name: "icon_music_note", color: .orange)
+                case "P": return Icon(name: "icon_music_note", color: .darkPurple)
+                case "R": return Icon(name: "icon_music_note", color: .darkRed)
+                case "W": return Icon(name: "icon_music_note", color: .white)
+                case "Y": return Icon(name: "icon_music_note", color: .yellow)
                 default: return nil
                 }
             })

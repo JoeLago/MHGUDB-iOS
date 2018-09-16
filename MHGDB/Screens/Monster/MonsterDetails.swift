@@ -70,20 +70,20 @@ extension Weaknesses: ImageLabelCellProtocol {
     
     var values: [ImageLabelModel] {
         return [
-            ImageLabelModel("Fire.png", fire),
-            ImageLabelModel("Water.png", water),
-            ImageLabelModel("Thunder.png", thunder),
-            ImageLabelModel("Ice.png", ice),
-            ImageLabelModel("Dragon.png", dragon),
-            ImageLabelModel("Poison.png", poison),
-            ImageLabelModel("Paralysis", paralysis),
-            ImageLabelModel("Sleep.png", sleep),
-            ImageLabelModel("Trap-Green.png", pitfallTrap, doShowValue: false),
-            ImageLabelModel("Traptool-Yellow.png", shockTrap, doShowValue: false),
-            ImageLabelModel("Bomb-Yellow.png", flashBomb, doShowValue: false),
-            ImageLabelModel("Bomb-White.png", sonicBomb, doShowValue: false),
-            ImageLabelModel("Dung.png", dungBomb, doShowValue: false),
-            ImageLabelModel("Meat-Red.png", meat, doShowValue: false)
+            ImageLabelModel("Fire.png", value: fire),
+            ImageLabelModel("Water.png", value: water),
+            ImageLabelModel("Thunder.png", value: thunder),
+            ImageLabelModel("Ice.png", value: ice),
+            ImageLabelModel("Dragon.png", value: dragon),
+            ImageLabelModel("Poison.png", value: poison),
+            ImageLabelModel("Paralysis", value: paralysis),
+            ImageLabelModel("Sleep.png", value: sleep),
+            ImageLabelModel("Trap-Green.png", value: pitfallTrap, doShowValue: false),
+            ImageLabelModel("Traptool-Yellow.png", value: shockTrap, doShowValue: false),
+            ImageLabelModel("Bomb-Yellow.png", value: flashBomb, doShowValue: false),
+            ImageLabelModel("Bomb-White.png", value: sonicBomb, doShowValue: false),
+            ImageLabelModel("Dung.png", value: dungBomb, doShowValue: false),
+            ImageLabelModel("Meat-Red.png", value: meat, doShowValue: false)
         ]
     }
 }

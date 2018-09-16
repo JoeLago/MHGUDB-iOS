@@ -26,14 +26,29 @@ struct Icon {
         self.init(name: name, color: Color(rawValue: colorType))
     }
 
+    init(name: String, rarity: Int) {
+        self.name = name
+        self.color = Color(rarity: rarity)
+    }
+
     init?(name: String?, color: Color? = nil) {
         self.name = name ?? "icon_quest_mark"
         self.color = color ?? .white
     }
 
-    init(name: String, rarity: Int) {
+    init(name: String, color: Color? = nil) {
         self.name = name
-        self.color = Color(rarity: rarity)
+        self.color = color ?? .white
+    }
+
+    var image: UIImage? {
+        guard var image = UIImage(named: name) else {
+            return nil
+        }
+        if let color = color?.color {
+            image = image.tint(color)
+        }
+        return image
     }
 
     enum Color: Int {
@@ -88,22 +103,5 @@ struct Icon {
             case .rare11:  return UIColor(hex: 0x5834b8)
             }
         }
-
-        /*
-
- @JvmStatic fun getNoteColor(note: Char): Int {
- when (note) {
- 'B' -> return R.color.item_dark_blue
- 'C' -> return R.color.item_cyan
- 'G' -> return R.color.item_dark_green
- 'O' -> return R.color.item_orange
- 'P' -> return R.color.item_dark_purple
- 'R' -> return R.color.item_dark_red
- 'W' -> return R.color.item_white
- 'Y' -> return R.color.item_yellow
- }
- return R.color.item_white
- }
- */
     }
 }

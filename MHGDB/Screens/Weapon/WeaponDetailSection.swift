@@ -38,14 +38,14 @@ class WeaponDetailSection: MultiCellSection {
         if let phial = weapon.phial {
             addDetail(label: "Phial", text:"\(phial)\(weapon.phialAttack != nil ? " \(weapon.phialAttack ?? 0)": "")")
         }
-        
-        if let notes = weapon.noteImageNames {
-          let model = ImageLabelCellModel(values: notes.compactMap { ImageLabelModel($0) }, label: "Notes")
+
+        if let notes = weapon.noteIcons {
+            let model = ImageLabelCellModel(values: notes.compactMap { ImageLabelModel(icon: $0) }, label: "Notes")
             addCell(ImageLabelCell<ImageLabelCellModel>(model: model))
         }
-        
+
         if let coatings = weapon.coatingImageNames {
-          let model = ImageLabelCellModel(values: coatings.compactMap { ImageLabelModel($0) }, label: "Coatings")
+            let model = ImageLabelCellModel(values: coatings.compactMap { ImageLabelModel($0) }, label: "Coatings")
             addCell(ImageLabelCell<ImageLabelCellModel>(model: model))
         }
         
