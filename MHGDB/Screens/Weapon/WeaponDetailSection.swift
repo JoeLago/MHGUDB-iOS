@@ -44,8 +44,8 @@ class WeaponDetailSection: MultiCellSection {
             addCell(ImageLabelCell<ImageLabelCellModel>(model: model))
         }
 
-        if let coatings = weapon.coatingImageNames {
-            let model = ImageLabelCellModel(values: coatings.compactMap { ImageLabelModel($0) }, label: "Coatings")
+        if let coatings = weapon.coatingIcons {
+            let model = ImageLabelCellModel(values: coatings.compactMap { ImageLabelModel(icon: $0) }, label: "Coatings")
             addCell(ImageLabelCell<ImageLabelCellModel>(model: model))
         }
         

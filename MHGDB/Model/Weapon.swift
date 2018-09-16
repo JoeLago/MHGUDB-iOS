@@ -191,22 +191,26 @@ class Weapon: RowConvertible {
         }
     }
     
-    var coatingImageNames: [String]? {
-        if let coatings = Int(coatings) {
-            var coatingImageNames = [String]()
-            
-            if (coatings & 0x0400) > 0 || (coatings & 0x0200) > 0 { coatingImageNames.append("Bottle-Red.png") }
-            if (coatings & 0x20) > 0 { coatingImageNames.append("Bottle-Purple.png") }
-            if (coatings & 0x10) > 0 { coatingImageNames.append("Bottle-Yellow.png") }
-            if (coatings & 0x08) > 0 { coatingImageNames.append("Bottle-Cyan.png") }
-            if (coatings & 0x40) > 0 { coatingImageNames.append("Bottle-White.png") }
-            if (coatings & 0x04) > 0 { coatingImageNames.append("Bottle-Blue.png") }
-            if (coatings & 0x02) > 0 { coatingImageNames.append("Bottle-Orange.png") }
-            
-            return coatingImageNames
-        } else {
-            return nil
+    var coatingIcons: [Icon]? {
+        guard let coatings = Int(coatings) else { return nil }
+        var coatingIcons = [Icon]()
+
+        func addCoating(offset: Int, color: Icon.Color) {
+            if (coatings & offset) > 0 {
+                coatingIcons.append(Icon(name: "icon_bottle", color: color))
+            }
         }
+
+        addCoating(offset: 0x0400, color: .darkRed)
+        addCoating(offset: 0x0200, color: .darkRed)
+        addCoating(offset: 0x20, color: .darkPurple)
+        addCoating(offset: 0x10, color: .yellow)
+        addCoating(offset: 0x08, color: .cyan)
+        addCoating(offset: 0x40, color: .white)
+        addCoating(offset: 0x04, color: .darkBlue)
+        addCoating(offset: 0x02, color: .orange)
+
+        return coatingIcons
     }
     
     var numChildren: Int {
