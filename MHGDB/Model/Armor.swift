@@ -178,7 +178,7 @@ extension Database {
     }
     
     func armorComponents(armorId: Int) -> [ArmorComponent] {
-        let query = "SELECT"
+        let query = "SELECT *,"
             + " component._id AS componentid,"
             + " component.name AS componentname,"
             + " component.type AS componenttype,"
