@@ -79,17 +79,26 @@ class WeaponView: TreeCellView<Weapon> {
     private func populateAttack() {
         let attack = NSMutableAttributedString()
         attack.append(string: "\(weapon.attack ?? 0) ")
-        
-        if weapon.elementAttack ?? 0 > 0 {
+
+        if let elementAttack = weapon.elementAttack, elementAttack > 0 {
             attack.appendImage(named: (weapon.element?.rawValue ?? "") + ".png")
-            attack.append(string: " \(weapon.elementAttack ?? 0)")
+            attack.append(string: " \(elementAttack)")
+        }
+
+        if let element2Attack = weapon.element2Attack, element2Attack > 0 {
+            attack.appendImage(named: (weapon.element?.rawValue ?? "") + ".png")
+            attack.append(string: " \(element2Attack)")
         }
         
         if weapon.awakenAttack ?? 0 > 0 {
             attack.appendImage(named: (weapon.awakenElement?.rawValue ?? "") + ".png")
             attack.append(string: " \(weapon.awakenAttack ?? 0)")
         }
-        
+
+        if let affinity = weapon.affinity, affinity != 0 {
+            attack.append(string: " \(affinity > 0 ? "+" : "")\(affinity)%")
+        }
+
         if let defense = weapon.defense, defense > 0 {
             attack.append(string: " \(defense)def")
         }

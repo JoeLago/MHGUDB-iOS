@@ -85,6 +85,8 @@ class Weapon: RowConvertible {
     var attack: Int?
     var element: Element?
     var elementAttack: Int?
+    var element2: Element?
+    var element2Attack: Int?
     var awakenElement: Element?
     var awakenAttack: Int?
     var defense: Int?
@@ -125,12 +127,12 @@ class Weapon: RowConvertible {
         name = row["name"]
         attack = row["attack"]
         defense = row["def"]
+        affinity = row["affinity"]
         numSlots = row["num_slots"]
         rarity = row["rarity"]
         creationCost = row["creation_cost"]
         upgradeCost = row["upgrade_cost"]
         sell = row["sell"]
-        elementAttack = row["element_attack"]
         recoil = row["recoil"]
         reloadSpeed = row["reload_speed"]
         rapidFire = row["rapid_fire"]
@@ -149,9 +151,15 @@ class Weapon: RowConvertible {
         phial = row["phial"]
         shellingType = row["shelling_type"]
         notes = row["horn_notes"]
-        
+
+        elementAttack = row["element_attack"]
         if elementAttack ?? 0 > 0, let elementString: String = row["element"] {
             element = Element(rawValue: elementString)
+        }
+
+        element2Attack = row["element_2_attack"]
+        if element2Attack ?? 0 > 0, let element2String: String = row["element_2"] {
+            element2 = Element(rawValue: element2String)
         }
         
         if type == .switchAxe, element == nil, elementAttack ?? 0 > 0 {
