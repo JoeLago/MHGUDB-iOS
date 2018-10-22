@@ -9,6 +9,22 @@ import UIKit
 class MonsterList: DetailController {
     var monsterSection: SimpleDetailSection<Monster>!
     var segment: UISegmentedControl!
+
+    var monsterSize: Monster.Size? {
+        didSet {
+            monsterSection.rows = Database.shared.monsters(size: monsterSize)
+        }
+    }
+
+    var selectedSize: Monster.Size? {
+        get {
+            switch segment.selectedSegmentIndex {
+            case 0: return .large
+            case 1: return .small
+            default: return nil
+            }
+        }
+    }
     
     override func loadView() {
         super.loadView()
@@ -25,22 +41,6 @@ class MonsterList: DetailController {
         segment.selectedSegmentIndex = 0
         
         isToolBarHidden = false;
-    }
-    
-    var selectedSize: Monster.Size? {
-        get {
-            switch segment.selectedSegmentIndex {
-            case 0: return .large
-            case 1: return .small
-            default: return nil
-            }
-        }
-    }
-    
-    var monsterSize: Monster.Size? {
-        didSet {
-            monsterSection.rows = Database.shared.monsters(size: monsterSize)
-        }
     }
     
     override func reloadData() {

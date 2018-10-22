@@ -31,7 +31,7 @@ extension DetailController {
                           cellType: U.Type,
                           selectionBlock: ((T) -> UIViewController)? = nil) {
         
-        add(section: CustomSection<T, U>(title: nil, data: data, header: nil, selectionBlock: getPushBlock(selectionBlock)))
+        add(section: CustomSection(title: nil, cellType: U.self, data: data, header: nil, selectionBlock: getPushBlock(selectionBlock)))
     }
     
     func addCustomSection<T, U: CustomCell<T>>(header: HeaderView,
@@ -39,7 +39,7 @@ extension DetailController {
                           cellType: U.Type,
                           selectionBlock: ((T) -> UIViewController)? = nil) {
         
-        add(section: CustomSection<T, U>(title: nil, data: data, header: header, selectionBlock: getPushBlock(selectionBlock)))
+        add(section: CustomSection(title: nil, cellType: U.self, data: data, header: header, selectionBlock: getPushBlock(selectionBlock)))
     }
     
     @discardableResult
@@ -48,7 +48,7 @@ extension DetailController {
                           cellType: U.Type,
                           showCount: Bool = false,
                           selectionBlock: ((T) -> UIViewController)? = nil) -> CustomSection<T, U> {
-        let section = CustomSection<T, U>(title: title, data: data, header: nil,
+        let section = CustomSection(title: title, cellType: U.self, data: data, header: nil,
                                           selectionBlock: getPushBlock(selectionBlock))
         section.showCountMinRows = showCount ? 2 : -1
         add(section: section)

@@ -17,12 +17,13 @@ class CustomSection<T, U: CustomCell<T>>: DetailSection {
     var selectionBlock: ((T) -> Void)?
     var identifier: String = "cell" // override
     var cellClass: AnyClass
-    
-    init(title: String?,
+
+    init(title: String? = nil,
+         cellType: U.Type,
          data: [T],
          header: HeaderView? = nil,
          selectionBlock: ((T) -> Void)? = nil) {
-        cellClass = UITableViewCell.self
+        cellClass = cellType
         super.init()
         self.title = title
         self.rows = data

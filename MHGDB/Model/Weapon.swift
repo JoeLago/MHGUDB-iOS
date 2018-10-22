@@ -371,6 +371,11 @@ extension Database {
             + " LEFT JOIN items on weapons._id = items._id"
             + " WHERE wtype == '" + type.rawValue + "'"
     }
+
+    func finalWeapons(type: Weapon.WType) -> [Weapon] {
+        let query = weaponQuery(type: type) + " AND final != 0"
+        return fetch(query)
+    }
     
     func weaponsByParent(type: Weapon.WType) -> [Int: [Weapon]] {
         var weaponsByParent = [Int: [Weapon]]()
