@@ -18,6 +18,7 @@ class WeaponDetailSection: MultiCellSection {
     override func populateCells() {
         
         addCell(MultiDetailCell(details: [
+            SingleDetailLabel(label: "Rarity", value: weapon.rarity),
             SingleDetailLabel(label: "Affinity", value: "\(weapon.affinity ?? 0)%"),
             weapon.creationCost ?? 0 > 0 ? SingleDetailLabel(label: "Create Cost", value: weapon.creationCost) : nil,
             weapon.upgradeCost ?? 0 > 0 ? SingleDetailLabel(label: "Upgrade Cost", value: weapon.upgradeCost) : nil
