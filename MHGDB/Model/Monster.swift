@@ -11,6 +11,7 @@ import GRDB
 class Monster: RowConvertible {
     enum Size: String {
         case large = "Large"
+        case deviant = "Deviant"
         case small = "Small"
         
         init?(_ size: Int?) {
@@ -20,8 +21,17 @@ class Monster: RowConvertible {
             
             switch size! {
             case 0: self = .large
+            case 2: self = .deviant
             case 1: self = .small
             default: return nil
+            }
+        }
+
+        var dbValue: Int {
+            switch self {
+            case .large: return 0
+            case .deviant: return 2
+            case .small: return 1
             }
         }
     }
@@ -309,14 +319,9 @@ extension Database {
     func monsters(_ search: String? = nil, size: Monster.Size? = nil) -> [Monster] {
         let query = "SELECT * FROM monsters"
         let order = "ORDER BY sort_name"
-        
+
         if let size = size {
-            switch size {
-            case .small:
-                return fetch(select: query, order: order, filter: "class = 1")
-            case .large:
-                return fetch(select: query, order: order, filter: "class = 0")
-            }
+            return fetch(select: query, order: order, filter: "class = \(size.dbValue)")
         } else {
             return fetch(select: query, order: order, search: search)
         }

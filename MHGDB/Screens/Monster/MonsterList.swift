@@ -20,7 +20,8 @@ class MonsterList: DetailController {
         get {
             switch segment.selectedSegmentIndex {
             case 0: return .large
-            case 1: return .small
+            case 1: return .deviant
+            case 2: return .small
             default: return nil
             }
         }
@@ -37,7 +38,7 @@ class MonsterList: DetailController {
         }
         add(section: monsterSection)
         
-        segment = populateToolbarSegment(items: ["Large", "Small", "All"])
+        segment = populateToolbarSegment(items: ["Large", "Deviant", "Small", "All"])
         segment.selectedSegmentIndex = 0
         
         isToolBarHidden = false;
