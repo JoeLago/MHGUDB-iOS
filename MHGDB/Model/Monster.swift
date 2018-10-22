@@ -323,7 +323,7 @@ extension Database {
     }
     
     func monsterStatus(monsterId: Int) -> [MonsterStatus] {
-        let query = "SELECT * FROM monster_status WHERE monster_id = \(monsterId) ORDER BY sort_name"
+        let query = "SELECT * FROM monster_status WHERE monster_id = \(monsterId)"
         return fetch(query)
     }
     
