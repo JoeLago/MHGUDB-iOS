@@ -353,7 +353,18 @@ extension Database {
         let query = "SELECT * FROM weapons LEFT JOIN items on weapons._id = items._id WHERE weapons._id = \(id)"
         return fetch(query)[0]
     }
-    
+
+    func addWeaponToFavorites(id: Int) {
+        let query = "INSERT INTO weapon_favorites VALUES (\(id))"
+        write(query)
+    }
+
+    func favoriteWeapons() -> [Weapon] {
+        return fetch("SELECT * FROM weapon_favorites"
+            + " LEFT JOIN weapons on weapons._id = weapon_favorites.weapon_id"
+            + " LEFT JOIN items on weapons._id = items._id")
+    }
+
     func allWeapons() -> [Weapon] {
         let query = "SELECT * FROM weapons LEFT JOIN items on weapons._id = items._id"
         return fetch(query)

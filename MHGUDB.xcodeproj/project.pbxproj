@@ -258,6 +258,8 @@
 		141B2D55217D5E7F003BF15C /* icon_armor_head.png in Resources */ = {isa = PBXBuildFile; fileRef = 141B2C5D217D5E7E003BF15C /* icon_armor_head.png */; };
 		141B2D56217D5E7F003BF15C /* icon_dual_blades.png in Resources */ = {isa = PBXBuildFile; fileRef = 141B2C5E217D5E7E003BF15C /* icon_dual_blades.png */; };
 		141B2D57217D5E7F003BF15C /* monster_arzuros.png in Resources */ = {isa = PBXBuildFile; fileRef = 141B2C5F217D5E7E003BF15C /* monster_arzuros.png */; };
+		141B2D5A21803461003BF15C /* DatabaseUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141B2D5921803461003BF15C /* DatabaseUpdates.swift */; };
+		141B2D5D218042E5003BF15C /* FavoritesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141B2D5C218042E5003BF15C /* FavoritesScreen.swift */; };
 		1452DB1E1F71061F006A11D7 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452DB1D1F71061F006A11D7 /* UserDefaults.swift */; };
 		1452DB201F7108F8006A11D7 /* Int+TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452DB1F1F7108F8006A11D7 /* Int+TimeInterval.swift */; };
 		145FEA771F78A6C100BF9237 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145FEA761F78A6C100BF9237 /* ReviewManager.swift */; };
@@ -666,6 +668,8 @@
 		141B2C5D217D5E7E003BF15C /* icon_armor_head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_armor_head.png; sourceTree = "<group>"; };
 		141B2C5E217D5E7E003BF15C /* icon_dual_blades.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_dual_blades.png; sourceTree = "<group>"; };
 		141B2C5F217D5E7E003BF15C /* monster_arzuros.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monster_arzuros.png; sourceTree = "<group>"; };
+		141B2D5921803461003BF15C /* DatabaseUpdates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseUpdates.swift; sourceTree = "<group>"; };
+		141B2D5C218042E5003BF15C /* FavoritesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesScreen.swift; sourceTree = "<group>"; };
 		1452DB1D1F71061F006A11D7 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		1452DB1F1F7108F8006A11D7 /* Int+TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+TimeInterval.swift"; sourceTree = "<group>"; };
 		145495641EA9CEC5004FA5FA /* MHGUDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MHGUDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -860,6 +864,23 @@
 			path = Scripts;
 			sourceTree = "<group>";
 		};
+		141B2D582180342F003BF15C /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				14A24D1E1EA9D05400755F6A /* Database.swift */,
+				141B2D5921803461003BF15C /* DatabaseUpdates.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		141B2D5B218042A2003BF15C /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				141B2D5C218042E5003BF15C /* FavoritesScreen.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
 		1454955B1EA9CEC5004FA5FA = {
 			isa = PBXGroup;
 			children = (
@@ -929,11 +950,11 @@
 			isa = PBXGroup;
 			children = (
 				14A24D0E1EA9D05400755F6A /* Categories */,
+				141B2D582180342F003BF15C /* Database */,
 				14A24D181EA9D05400755F6A /* Cells */,
 				14DF85431EC297DA00F9AD1D /* ListGrid */,
 				14A24D261EA9D05400755F6A /* TableAbstraction */,
 				14A24D2E1EA9D05400755F6A /* Tree */,
-				14A24D1E1EA9D05400755F6A /* Database.swift */,
 				14E2B50A1EAD7AC9002A2A89 /* LabelStack.swift */,
 				14E2B5121EB1041D002A2A89 /* Logging.swift */,
 				14A24D211EA9D05400755F6A /* SelectionManager.swift */,
@@ -1045,6 +1066,7 @@
 				14A24D431EA9D05400755F6A /* Armor */,
 				14A24D471EA9D05400755F6A /* Combination */,
 				14A24D4B1EA9D05400755F6A /* Decoration */,
+				141B2D5B218042A2003BF15C /* Favorites */,
 				14A24D4F1EA9D05400755F6A /* Item */,
 				14A24D531EA9D05400755F6A /* Location */,
 				14A24D571EA9D05400755F6A /* Menu */,
@@ -2095,12 +2117,14 @@
 				1452DB201F7108F8006A11D7 /* Int+TimeInterval.swift in Sources */,
 				14E2B5131EB1041D002A2A89 /* Logging.swift in Sources */,
 				14A251241EA9D05400755F6A /* Quest.swift in Sources */,
+				141B2D5A21803461003BF15C /* DatabaseUpdates.swift in Sources */,
 				14A251411EA9D05500755F6A /* QuestDetailSection.swift in Sources */,
 				14A251091EA9D05400755F6A /* Database.swift in Sources */,
 				14E704141EB8E9FC00EA2E71 /* PalicoWeapon.swift in Sources */,
 				14E2B5031EAD2229002A2A89 /* SharpnessesView.swift in Sources */,
 				14612B171EB9B49900DB7F64 /* PalicoWeaponDetailSection.swift in Sources */,
 				14A251351EA9D05400755F6A /* LocationList.swift in Sources */,
+				141B2D5D218042E5003BF15C /* FavoritesScreen.swift in Sources */,
 				14A251221EA9D05400755F6A /* Location.swift in Sources */,
 				14A250FD1EA9D05400755F6A /* Int+NullString.swift in Sources */,
 				14A251251EA9D05400755F6A /* Sharpness.swift in Sources */,

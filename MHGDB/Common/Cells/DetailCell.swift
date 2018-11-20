@@ -23,29 +23,31 @@ extension DetailCellModel {
 
 class DetailCell: UITableViewCell {
     static let identifier = "detailCell"
-    
+
+    let stack = UIStackView(axis: .horizontal, spacing: 6, distribution: .fill)
+    let detailStack = UIStackView(axis: .vertical, spacing: 4)
     var primaryTextLabel = UILabel()
     var subtitleTextLabel = UILabel()
     var secondaryTextLabel = UILabel()
+    let imageWrapper = UIView()
     var iconImageView = UIImageView()
-    var imageWidthConstraint: NSLayoutConstraint?
-    
+    var iconSizeConstraints = [NSLayoutConstraint]()
+
     var model: DetailCellModel? {
         didSet {
             populateCell()
         }
     }
-    
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: DetailCell.identifier)
-        //selectionStyle = .none
         addViews()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("no")
     }
-    
+
     private func populateCell() {
         guard let model = model else {
             Log(error: "DetailCell model not set")
@@ -56,6 +58,10 @@ class DetailCell: UITableViewCell {
         primaryTextLabel.text = model.primary
         subtitleTextLabel.text = model.subtitle
         secondaryTextLabel.text = model.secondary
+        subtitleTextLabel.isHidden = model.subtitle == nil
+
+        //stack.spacing = model.spacing
+        //iconSizeConstraints.forEach { $0.constant = model.iconSize }
     }
     
     func setIcon(icon: Icon?) {
@@ -69,73 +75,51 @@ class DetailCell: UITableViewCell {
         }
 
         iconImageView.image = image
-        imageWidthConstraint?.constant = 40
+        //imageWidthConstraint?.constant = 40
     }
     
     func hideImage() {
-        // TODO: Fix margins
-        imageWidthConstraint?.constant = 0
+        imageWrapper.isHidden = true
     }
-    
+
     func addViews() {
-        contentView.addSubview(primaryTextLabel)
-        contentView.addSubview(secondaryTextLabel)
-        contentView.addSubview(subtitleTextLabel)
-        contentView.addSubview(iconImageView)
-        
-        for view in contentView.subviews {
-            view.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(stack)
+        imageWrapper.addSubview(iconImageView)
+        stack.addArrangedSubview(imageWrapper)
+        stack.addArrangedSubview(detailStack)
+        stack.addArrangedSubview(secondaryTextLabel)
+        detailStack.addArrangedSubview(primaryTextLabel)
+        detailStack.addArrangedSubview(subtitleTextLabel)
+
+        [imageWrapper, iconImageView, detailStack, subtitleTextLabel, primaryTextLabel, secondaryTextLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        
+
         subtitleTextLabel.font = Font.subTitle
         subtitleTextLabel.textColor = Color.Text.primary
         subtitleTextLabel.numberOfLines = 0
-        
         secondaryTextLabel.font = Font.title
         secondaryTextLabel.textColor = Color.Text.secondary
-        
         iconImageView.contentMode = .scaleAspectFit
-        
-        addConstraints()
-    }
-    
-    // TODO: Secondary needs compression resistance!
-    
-    func addConstraints() {
-        contentView.addConstraints(
-            formatStrings: ["H:|-[image]-[primary]-(>=pad)-[secondary]-|",
-                            "H:|-[image]-[subtitle]-(>=pad)-[secondary]-|",
-                            "V:|-(pad)-[primary]-(textPad)-[subtitle]-(pad)-|",
-                            "V:|-(>=pad)-[image(<=maxImageHeight)]-(>=pad)-|",
-                            "V:|-(pad)-[secondary]-(pad)-|"],
-            views: [
-                "primary": primaryTextLabel,
-                "secondary": secondaryTextLabel,
-                "subtitle": subtitleTextLabel,
-                "image": iconImageView
-                ],
-            metrics: [
-                "maxImageHeight": 30, // Don't want this, should fit in less space than labels
-                "textPad": 4,
-                "pad": 6
-            ])
-        
-        contentView.addConstraint(
-            NSLayoutConstraint(item: iconImageView,
-                               attribute: .centerY,
-                               relatedBy: .equal,
-                               toItem: contentView,
-                               attribute: .centerY,
-                               multiplier: 1.0,
-                               constant: 0))
-        
-        imageWidthConstraint = NSLayoutConstraint(item: iconImageView,
-                                                  attribute: .width,
-                                                  relatedBy: .equal,
-                                                  toItem: nil,
-                                                  attribute: .notAnAttribute,
-                                                  multiplier: 1.0,
-                                                  constant: 0)
-        addConstraint(imageWidthConstraint!)
+
+        // Constraints
+
+        stack.matchParent(top: 8, left: 12, bottom: 8, right: 16)
+        iconImageView.matchParent(top: 0, left: 0, bottom: nil, right: 0)
+
+        addConstraints([
+            iconImageView.bottomAnchor.constraint(lessThanOrEqualTo: imageWrapper.bottomAnchor)
+            ].compactMap({ $0 }))
+
+        iconSizeConstraints = [
+            iconImageView.widthAnchor.constraint(equalToConstant: 30),
+            iconImageView.heightAnchor.constraint(equalToConstant: 30)]
+        addConstraints(iconSizeConstraints)
+
+        iconImageView.setContentHuggingPriority(.required, for: .horizontal)
+        primaryTextLabel.setContentHuggingPriority(.required, for: .vertical)
+        primaryTextLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        secondaryTextLabel.setContentHuggingPriority(.required, for: .horizontal)
+        secondaryTextLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
 }

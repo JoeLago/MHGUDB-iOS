@@ -33,6 +33,7 @@ class ListMenu: SimpleTableViewController {
         addCell(text: "Decorations", icon: Icon(name: "icon_jewel.png", color: .cyan)) { DecorationList() }
         addCell(text: "Skills", icon: Icon(name: "icon_monster_jewel.png", color: .teal)) { SkillList() }
         addCell(text: "Palico", icon: Icon(name: "icon_cutting.png", color: .yellow)) { PalicoList() }
+        addCell(text: "Favorites", icon: Icon(name: "icon_cutting.png", color: .yellow)) { FavoritesList() }
     }
     
     override func viewDidAppear(_ animated: Bool) {
