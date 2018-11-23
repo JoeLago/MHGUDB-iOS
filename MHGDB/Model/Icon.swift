@@ -42,7 +42,7 @@ struct Icon {
     }
 
     var image: UIImage? {
-        guard var image = UIImage(named: name) else {
+        guard var image = UIImage(named: name, in: nil, compatibleWith: nil) else {
             return nil
         }
         if let color = color?.color {
@@ -103,5 +103,11 @@ struct Icon {
             case .rare11:  return UIColor(hex: 0x5834b8)
             }
         }
+    }
+}
+
+extension Icon: Equatable {
+    public static func == (lhs: Icon, rhs: Icon) -> Bool {
+        return lhs.name == rhs.name && lhs.color == rhs.color
     }
 }

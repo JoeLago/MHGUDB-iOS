@@ -30,7 +30,7 @@ extension NSMutableAttributedString {
     
     // TODO: Potentially want to pass in frame here
     func appendImage(named: String) {
-        let image = UIImage(named: named)
+        let image = UIImage(named: named, in: nil, compatibleWith: nil)
         if (image == nil) {
             Log(error: "Attributed string image not found: '\(named)'")
         }

@@ -382,6 +382,7 @@
 		14C611562149658A00055E4B /* exhaust.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611352149658A00055E4B /* exhaust.png */; };
 		14C611572149658A00055E4B /* Status_Effect-Fireblight_MH4_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611362149658A00055E4B /* Status_Effect-Fireblight_MH4_Icon.png */; };
 		14C611582149658A00055E4B /* effectiveness-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611372149658A00055E4B /* effectiveness-1.png */; };
+		14DE658721A7221200C7EBAD /* ImagePreloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE658621A7221200C7EBAD /* ImagePreloader.swift */; };
 		14DF85451EC297E400F9AD1D /* ListGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DF85441EC297E400F9AD1D /* ListGrid.swift */; };
 		14E2B5031EAD2229002A2A89 /* SharpnessesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2B4FE1EAD2229002A2A89 /* SharpnessesView.swift */; };
 		14E2B5041EAD2229002A2A89 /* SharpnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2B4FF1EAD2229002A2A89 /* SharpnessView.swift */; };
@@ -795,6 +796,7 @@
 		14C611352149658A00055E4B /* exhaust.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exhaust.png; sourceTree = "<group>"; };
 		14C611362149658A00055E4B /* Status_Effect-Fireblight_MH4_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status_Effect-Fireblight_MH4_Icon.png"; sourceTree = "<group>"; };
 		14C611372149658A00055E4B /* effectiveness-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "effectiveness-1.png"; sourceTree = "<group>"; };
+		14DE658621A7221200C7EBAD /* ImagePreloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreloader.swift; sourceTree = "<group>"; };
 		14DF85441EC297E400F9AD1D /* ListGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListGrid.swift; sourceTree = "<group>"; };
 		14E2B4FE1EAD2229002A2A89 /* SharpnessesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharpnessesView.swift; sourceTree = "<group>"; };
 		14E2B4FF1EAD2229002A2A89 /* SharpnessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharpnessView.swift; sourceTree = "<group>"; };
@@ -962,6 +964,7 @@
 				1452DB1D1F71061F006A11D7 /* UserDefaults.swift */,
 				145FEA761F78A6C100BF9237 /* ReviewManager.swift */,
 				14C60ED72146E65E00055E4B /* Image+Tinting.swift */,
+				14DE658621A7221200C7EBAD /* ImagePreloader.swift */,
 			);
 			name = Common;
 			path = MHGDB/Common;
@@ -2047,6 +2050,7 @@
 				14A251341EA9D05400755F6A /* LocationDetails.swift in Sources */,
 				14A251051EA9D05400755F6A /* DetailCell.swift in Sources */,
 				14A2512D1EA9D05400755F6A /* CombinationList.swift in Sources */,
+				14DE658721A7221200C7EBAD /* ImagePreloader.swift in Sources */,
 				14A251261EA9D05400755F6A /* SkillTree.swift in Sources */,
 				14A251151EA9D05400755F6A /* SimpleDetailSection.swift in Sources */,
 				14A251041EA9D05400755F6A /* CustomCell.swift in Sources */,

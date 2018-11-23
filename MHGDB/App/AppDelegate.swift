@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidFinishLaunching(_ application: UIApplication) {
         Logs.start()
         Color.setDefaults()
+        Database.shared.preloadImagesInBackground()
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UINavigationController(rootViewController: ListMenu())

@@ -21,7 +21,7 @@ extension String {
 extension NSAttributedString {
     convenience init(imageName: String, width: Int = 14, height: Int = 14) {
         let attachment = NSTextAttachment()
-        attachment.image = UIImage(named: imageName)
+        attachment.image = UIImage(named: imageName, in: nil, compatibleWith: nil)
         attachment.bounds = CGRect(x: 0, y: 0, width: width, height: height)
         self.init(attachment: attachment)
     }

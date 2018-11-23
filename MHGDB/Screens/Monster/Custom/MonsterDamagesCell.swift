@@ -19,15 +19,15 @@ class MonsterDamagesCell: GridCell<MonsterDamageByPart> {
     func populate(damages: MonsterDamageByPart) {
         add(values: [
             damages.state.bold,
-            "icon_great_sword.png".attributedImage,
-            "icon_hammer.png".attributedImage,
-            "icon_heavy_bowgun.png".attributedImage,
-            "Fire.png".attributedImage,
-            "Water.png".attributedImage,
-            "Ice.png".attributedImage,
-            "Thunder.png".attributedImage,
-            "Dragon.png".attributedImage,
-            "Stun.png".attributedImage,
+            "icon_great_sword".attributedImage,
+            "icon_hammer".attributedImage,
+            "icon_heavy_bowgun".attributedImage,
+            "Fire".attributedImage,
+            "Water".attributedImage,
+            "Ice".attributedImage,
+            "Thunder".attributedImage,
+            "Dragon".attributedImage,
+            "Stun".attributedImage,
             ])
         
         

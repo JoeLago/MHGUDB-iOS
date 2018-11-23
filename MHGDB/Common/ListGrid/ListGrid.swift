@@ -22,7 +22,7 @@ class ListGridCell: UICollectionViewCell {
     var model: SimpleCellModel? {
         didSet {
             if let model = model {
-                icon.image = UIImage(named: model.icon?.name ?? "")
+                icon.image = model.icon?.image
                 label.text = model.text
             }
         }

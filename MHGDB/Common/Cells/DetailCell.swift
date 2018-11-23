@@ -39,7 +39,14 @@ class DetailCell: UITableViewCell {
         }
     }
 
+    var shouldHideImage: Bool {
+        didSet {
+            imageWrapper.isHidden = shouldHideImage
+        }
+    }
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        shouldHideImage = false
         super.init(style: .default, reuseIdentifier: DetailCell.identifier)
         addViews()
     }
@@ -54,7 +61,7 @@ class DetailCell: UITableViewCell {
             return
         }
 
-        setIcon(icon: model.icon)
+        updateIcon()
         primaryTextLabel.text = model.primary
         subtitleTextLabel.text = model.subtitle
         secondaryTextLabel.text = model.secondary
@@ -63,23 +70,35 @@ class DetailCell: UITableViewCell {
         //stack.spacing = model.spacing
         //iconSizeConstraints.forEach { $0.constant = model.iconSize }
     }
-    
-    func setIcon(icon: Icon?) {
-        guard let icon = icon, var image = UIImage(named: icon.name) else {
-            hideImage()
+
+    func updateIcon() {
+        guard let image = model?.icon?.image else {
+            shouldHideImage = true
             return
         }
 
-        if let tintColor = icon.color?.color {
-            image = image.tint(tintColor)
-        }
-
+        shouldHideImage = false
         iconImageView.image = image
-        //imageWidthConstraint?.constant = 40
     }
-    
-    func hideImage() {
-        imageWrapper.isHidden = true
+
+    // For later investigation, scrolling table shows too many blank images for too long
+    func updateIconInBackground() {
+        iconImageView.image = nil
+
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let icon = self?.model?.icon, let image = icon.image else {
+                DispatchQueue.main.async { [weak self] in
+                    self?.shouldHideImage = true
+                }
+                return
+            }
+
+            DispatchQueue.main.async { [weak self] in
+                guard self?.model?.icon == icon else { return }
+                self?.shouldHideImage = false
+                self?.iconImageView.image = image
+            }
+        }
     }
 
     func addViews() {
