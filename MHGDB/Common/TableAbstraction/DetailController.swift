@@ -12,7 +12,7 @@ protocol DetailScreen {
 
 // TODO: This does more than just Details, used for lists, rename
 class DetailController: UITableViewController {
-    var database = Database()
+    var database = Database.shared
     var sections = [DetailSection]()
     var isToolBarHidden = true
     var hackyButtonRetains = [Any]()

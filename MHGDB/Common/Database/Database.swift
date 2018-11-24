@@ -119,3 +119,10 @@ class RowString: RowConvertible {
         value = row[RowString.column]
     }
 }
+
+private class Version: RowConvertible {
+    let version: Int
+    required init(row: Row) {
+        version = row["version"] ?? 0
+    }
+}

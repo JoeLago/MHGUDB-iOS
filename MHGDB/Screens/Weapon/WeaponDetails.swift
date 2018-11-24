@@ -17,6 +17,7 @@ class WeaponDetails: DetailController, DetailScreen {
         id = weapon.id
         super.init()
         title = weapon.name
+        isToolBarHidden = false
         addCustomSection(data: [weapon], cellType: WeaponCell.self)
         add(section: WeaponDetailSection(weapon: weapon))
         
@@ -38,6 +39,16 @@ class WeaponDetails: DetailController, DetailScreen {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("I don't want to use storyboards Apple")
+    }
+
+    override func loadView() {
+        super.loadView()
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addToFavorites))
+        toolbarItems = [UIBarButtonItem.flexible(), addButton]
+    }
+
+    @objc func addToFavorites() {
+        Database.shared.addWeaponToFavorites(id: id)
     }
 }
 
