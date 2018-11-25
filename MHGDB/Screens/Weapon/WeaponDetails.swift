@@ -43,12 +43,19 @@ class WeaponDetails: DetailController, DetailScreen {
 
     override func loadView() {
         super.loadView()
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addToFavorites))
-        toolbarItems = [UIBarButtonItem.flexible(), addButton]
+        updateToolbar()
     }
 
     @objc func addToFavorites() {
-        Database.shared.addWeaponToFavorites(id: id)
+        Database.shared.bookmarkWeapon(id: id)
+        updateToolbar()
+    }
+
+    func updateToolbar() {
+        let isBookmarked = Database.shared.isBookmarked(weaponId: id)
+        let bookmarkIconName = isBookmarked ? "bookmark-selected" : "bookmark"
+        let addButton = UIBarButtonItem(image: UIImage(named: bookmarkIconName), style: .plain, target: self, action: #selector(addToFavorites))
+        toolbarItems = [UIBarButtonItem.flexible(), addButton]
     }
 }
 

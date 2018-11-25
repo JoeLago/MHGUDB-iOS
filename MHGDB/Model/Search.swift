@@ -65,19 +65,15 @@ class SearchRequest {
             skills: skills,
             palico: palico)
     }
-    
+
     @discardableResult
     func then(_ completed: @escaping (SearchResponse) -> Void) -> SearchRequest {
         DispatchQueue.global(qos: .background).async {
-            guard let response = self.search() else {
-                    return
-            }
-            
+            guard let response = self.search() else { return }
             DispatchQueue.main.async {
                 completed(response)
             }
         }
-        
         return self
     }
     

@@ -57,6 +57,16 @@ class Database {
             return nil
         }
     }
+
+    func fetchBool(_ query: String) -> Bool? {
+        do {
+            return try dbQueue.inDatabase { db in
+                return try Bool.fetchOne(db, query)
+            }
+        } catch {
+            return nil
+        }
+    }
     
     func fetch<T: RowConvertible>(_ query: String, params: [DatabaseValueConvertible?]? = nil) -> [T] {
         do {
