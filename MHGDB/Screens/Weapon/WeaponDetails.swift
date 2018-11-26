@@ -27,7 +27,6 @@ class WeaponDetails: DetailController, DetailScreen {
         
         addSimpleSection(data: weapon.components, title: "Components") { ItemDetails(id: $0.id) }
         
-        
         let result = Database.shared.weaponTree(weaponId: weapon.id)
         let path = TreeSection<Weapon, WeaponView>(tree: result.1) {
             self.push(WeaponDetails(id: $0.id))
@@ -41,18 +40,18 @@ class WeaponDetails: DetailController, DetailScreen {
         fatalError("I don't want to use storyboards Apple")
     }
 
-    override func loadView() {
-        super.loadView()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         updateToolbar()
     }
 
     @objc func addToFavorites() {
-        Database.shared.bookmarkWeapon(id: id)
+        Database.shared.bookmarkItem(id: id)
         updateToolbar()
     }
 
     func updateToolbar() {
-        let isBookmarked = Database.shared.isBookmarked(weaponId: id)
+        let isBookmarked = Database.shared.isBookmarked(itemId: id)
         let bookmarkIconName = isBookmarked ? "bookmark-selected" : "bookmark"
         let addButton = UIBarButtonItem(image: UIImage(named: bookmarkIconName), style: .plain, target: self, action: #selector(addToFavorites))
         toolbarItems = [UIBarButtonItem.flexible(), addButton]

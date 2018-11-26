@@ -383,6 +383,7 @@
 		14C611572149658A00055E4B /* Status_Effect-Fireblight_MH4_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611362149658A00055E4B /* Status_Effect-Fireblight_MH4_Icon.png */; };
 		14C611582149658A00055E4B /* effectiveness-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 14C611372149658A00055E4B /* effectiveness-1.png */; };
 		14DE658721A7221200C7EBAD /* ImagePreloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE658621A7221200C7EBAD /* ImagePreloader.swift */; };
+		14DE658A21AA850F00C7EBAD /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE658921AA850F00C7EBAD /* Bookmark.swift */; };
 		14DF85451EC297E400F9AD1D /* ListGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DF85441EC297E400F9AD1D /* ListGrid.swift */; };
 		14E2B5031EAD2229002A2A89 /* SharpnessesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2B4FE1EAD2229002A2A89 /* SharpnessesView.swift */; };
 		14E2B5041EAD2229002A2A89 /* SharpnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2B4FF1EAD2229002A2A89 /* SharpnessView.swift */; };
@@ -797,6 +798,7 @@
 		14C611362149658A00055E4B /* Status_Effect-Fireblight_MH4_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Status_Effect-Fireblight_MH4_Icon.png"; sourceTree = "<group>"; };
 		14C611372149658A00055E4B /* effectiveness-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "effectiveness-1.png"; sourceTree = "<group>"; };
 		14DE658621A7221200C7EBAD /* ImagePreloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreloader.swift; sourceTree = "<group>"; };
+		14DE658921AA850F00C7EBAD /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		14DF85441EC297E400F9AD1D /* ListGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListGrid.swift; sourceTree = "<group>"; };
 		14E2B4FE1EAD2229002A2A89 /* SharpnessesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharpnessesView.swift; sourceTree = "<group>"; };
 		14E2B4FF1EAD2229002A2A89 /* SharpnessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharpnessView.swift; sourceTree = "<group>"; };
@@ -876,12 +878,13 @@
 			path = Database;
 			sourceTree = "<group>";
 		};
-		141B2D5B218042A2003BF15C /* Favorites */ = {
+		141B2D5B218042A2003BF15C /* Bookmarks */ = {
 			isa = PBXGroup;
 			children = (
 				141B2D5C218042E5003BF15C /* BookmarksScreen.swift */,
+				14DE658921AA850F00C7EBAD /* Bookmark.swift */,
 			);
-			path = Favorites;
+			path = Bookmarks;
 			sourceTree = "<group>";
 		};
 		1454955B1EA9CEC5004FA5FA = {
@@ -1069,7 +1072,7 @@
 				14A24D431EA9D05400755F6A /* Armor */,
 				14A24D471EA9D05400755F6A /* Combination */,
 				14A24D4B1EA9D05400755F6A /* Decoration */,
-				141B2D5B218042A2003BF15C /* Favorites */,
+				141B2D5B218042A2003BF15C /* Bookmarks */,
 				14A24D4F1EA9D05400755F6A /* Item */,
 				14A24D531EA9D05400755F6A /* Location */,
 				14A24D571EA9D05400755F6A /* Menu */,
@@ -2068,6 +2071,7 @@
 				14A2512C1EA9D05400755F6A /* CombinationDetail.swift in Sources */,
 				14E2B50D1EAE5E46002A2A89 /* MonsterStatusesCell.swift in Sources */,
 				14E2B5091EAD7A8A002A2A89 /* GridCell.swift in Sources */,
+				14DE658A21AA850F00C7EBAD /* Bookmark.swift in Sources */,
 				14A2513E1EA9D05500755F6A /* MonsterList.swift in Sources */,
 				14A2511B1EA9D05400755F6A /* Armor.swift in Sources */,
 				14A251401EA9D05500755F6A /* QuestDetails.swift in Sources */,

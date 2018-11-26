@@ -28,7 +28,7 @@ extension Database {
         // These should probably throw on failure so we try again
         write("CREATE TABLE version (version integer NOT NULL)")
         write("INSERT INTO Version (version) VALUES (0)")
-        write("CREATE TABLE weapon_favorites (weapon_id integer NOT NULL)")
+        write("CREATE TABLE item_favorites (item_id integer NOT NULL)")
         //FOREIGN KEY (weapon_id) REFERENCES weapons(_id)
     }
 }

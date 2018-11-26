@@ -17,14 +17,32 @@ class ArmorDetails: DetailController, DetailScreen {
         id = armor.id
         super.init()
         title = armor.name
+        isToolBarHidden = false
         addSimpleSection(data: [armor])
         addSimpleSection(data: armor.skills, title: "Skills") { SkillDetails(id: $0.skillId) }
         addCustomSection(title: "Resistances", data: [armor.resistances], cellType: ImageLabelCell.self)
-        addSimpleSection(data: armor.components, title: "Components") { ItemDetails(id: $0.itemId) }
+        addSimpleSection(data: armor.components, title: "Components") { ItemDetails(id: $0.id) }
     }
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateToolbar()
+    }
+
+    @objc func addToFavorites() {
+        Database.shared.bookmarkItem(id: id)
+        updateToolbar()
+    }
+
+    func updateToolbar() {
+        let isBookmarked = Database.shared.isBookmarked(itemId: id)
+        let bookmarkIconName = isBookmarked ? "bookmark-selected" : "bookmark"
+        let addButton = UIBarButtonItem(image: UIImage(named: bookmarkIconName), style: .plain, target: self, action: #selector(addToFavorites))
+        toolbarItems = [UIBarButtonItem.flexible(), addButton]
     }
 }
 
@@ -36,8 +54,6 @@ extension ArmorSkill: DetailCellModel {
 extension ArmorComponent: DetailCellModel {
     var primary: String? { return name }
     var secondary: String? { return "x \(quantity ?? 0)" }
-    // TODO: Do we need this?  Create/Upgrade should get there own sections, armor is only create?
-    //var subtitle: String? { return type }
 }
 
 extension Resistances: ImageLabelCellProtocol {

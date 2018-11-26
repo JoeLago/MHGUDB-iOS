@@ -95,8 +95,8 @@ class Armor: RowConvertible {
         return Database.shared.armorSkills(itemId: self.id)
     }()
     
-    lazy var components: [ArmorComponent] = {
-        return Database.shared.armorComponents(armorId: self.id)
+    lazy var components: [Component] = {
+        return Database.shared.components(itemId: id)
     }()
     
     var resistances: Resistances
@@ -174,19 +174,6 @@ extension Database {
             + " LEFT JOIN items ON item_to_skill_tree.item_id = items._id"
             + " LEFT JOIN skill_trees ON item_to_skill_tree.skill_tree_id = skill_trees._id"
             + " WHERE items._id == \(itemId)"
-        return fetch(query)
-    }
-    
-    func armorComponents(armorId: Int) -> [ArmorComponent] {
-        let query = "SELECT *,"
-            + " component._id AS componentid,"
-            + " component.name AS componentname,"
-            + " component.type AS componenttype,"
-            + Icon.iconQueryAttributes(table: "component")
-            + " FROM components"
-            + " LEFT JOIN items ON components.created_item_id = items._id"
-            + " LEFT JOIN items AS component ON components.component_item_id = component._id"
-            + " WHERE items._id == \(armorId)"
         return fetch(query)
     }
 }

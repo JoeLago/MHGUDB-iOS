@@ -19,7 +19,11 @@ struct Icon {
 
     init(row: Row, prefix: String = "") {
         name = row["\(prefix)icon_name"] ?? "icon_quest_mark"
-        color = Color(rawValue: row["\(prefix)icon_color"]) ?? .white
+        if let type: String = row["type"], (type == "Weapon" || type == "Armor") {
+            color = Color(rarity: row["rarity"])
+        } else {
+            color = Color(rawValue: row["\(prefix)icon_color"]) ?? .white
+        }
     }
 
     init?(name: String?, colorType: Int) {

@@ -9,6 +9,10 @@ import GRDB
 import UIKit
 
 class Item: RowConvertible {
+    enum `Type`: String {
+        case armor = "Armor", weapon = "Weapon", other
+    }
+
     let id: Int
     var name: String
     var description: String?
@@ -16,6 +20,7 @@ class Item: RowConvertible {
     let stack: Int
     let buy: Int
     let sell: Int
+    let type: Type
     
     lazy var quests: [ItemQuest] = {
         return Database.shared.rewards(itemId: self.id)
@@ -53,6 +58,7 @@ class Item: RowConvertible {
         stack = row["carry_capacity"]
         buy = row["buy"]
         sell = row["sell"]
+        type = Type(optionalRaw: row["type"]) ?? .other
     }
 }
 

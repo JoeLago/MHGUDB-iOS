@@ -354,24 +354,6 @@ extension Database {
         return fetch(query)[0]
     }
 
-    func bookmarkWeapon(id: Int) {
-        let query = isBookmarked(weaponId: id)
-            ? "DELETE FROM weapon_favorites WHERE weapon_id=(\(id))"
-            : "INSERT INTO weapon_favorites VALUES (\(id))"
-        write(query)
-    }
-
-    func isBookmarked(weaponId: Int) -> Bool {
-        let query = "SELECT EXISTS(SELECT 1 FROM weapon_favorites WHERE weapon_id=\(weaponId) LIMIT 1)"
-        return fetchBool(query) ?? false
-    }
-
-    func bookmarkedWeapons() -> [Weapon] {
-        return fetch("SELECT * FROM weapon_favorites"
-            + " LEFT JOIN weapons on weapons._id = weapon_favorites.weapon_id"
-            + " LEFT JOIN items on weapons._id = items._id")
-    }
-
     func allWeapons() -> [Weapon] {
         let query = "SELECT * FROM weapons LEFT JOIN items on weapons._id = items._id"
         return fetch(query)

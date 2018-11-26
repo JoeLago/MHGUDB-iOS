@@ -20,7 +20,13 @@ class BookmarksScreen: DetailController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         sections.removeAll()
-        addSimpleSection(data: Database.shared.bookmarkedWeapons()) { WeaponDetails($0) }
+        addSimpleSection(data: Database.shared.bookmarkedItems()) {
+            switch $0.type {
+            case .weapon: return WeaponDetails(id: $0.id)
+            case .armor: return ArmorDetails(id: $0.id)
+            case .other: return ItemDetails(id: $0.id)
+            }
+        }
         reloadData()
     }
 }
