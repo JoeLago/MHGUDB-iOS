@@ -7,7 +7,7 @@
 import Foundation
 import GRDB
 
-class Armor: RowConvertible {
+class Armor: FetchableRecord {
     
     enum HunterType: Int {
         case blade = 0, gunner, both, all
@@ -115,7 +115,7 @@ class Armor: RowConvertible {
     }
 }
 
-class ArmorSkill: RowConvertible {
+class ArmorSkill: FetchableRecord {
     let skillId: Int
     var name: String
     var value: Int
@@ -127,7 +127,7 @@ class ArmorSkill: RowConvertible {
     }
 }
 
-class ArmorComponent: RowConvertible {
+class ArmorComponent: FetchableRecord {
     var itemId: Int
     var name: String
     var icon: Icon?

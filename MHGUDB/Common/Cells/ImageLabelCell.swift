@@ -66,7 +66,7 @@ class ImageLabelCell<T: ImageLabelCellProtocol>: CustomCell<T> {
         populateCell()
     }
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: String(describing: ImageLabelCell.self))
         selectionStyle = .none
     }

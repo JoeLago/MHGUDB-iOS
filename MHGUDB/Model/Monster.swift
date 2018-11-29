@@ -8,7 +8,7 @@ import Foundation
 import GRDB
 
 
-class Monster: RowConvertible {
+class Monster: FetchableRecord {
     enum Size: String {
         case large = "Large"
         case deviant = "Deviant"
@@ -130,7 +130,7 @@ class Monster: RowConvertible {
     }
 }
 
-class Weaknesses: Elements, RowConvertible {
+class Weaknesses: Elements, FetchableRecord {
     var paralysis = 0
     var sleep = 0
     var pitfallTrap = 0
@@ -160,7 +160,7 @@ class Weaknesses: Elements, RowConvertible {
     }
 }
 
-class MonsterQuest: RowConvertible {
+class MonsterQuest: FetchableRecord {
     var questId: Int
     var questName: String?
     var icon: Icon?
@@ -182,7 +182,7 @@ class MonsterQuest: RowConvertible {
     }
 }
 
-class MonsterHabitat : RowConvertible {
+class MonsterHabitat : FetchableRecord {
     var locationId: Int
     var location: String?
     var startArea: String?
@@ -202,7 +202,7 @@ class MonsterHabitat : RowConvertible {
     }
 }
 
-class MonsterReward: RowConvertible {
+class MonsterReward: FetchableRecord {
     enum Source {
         case carve, capture, kill
     }
@@ -231,7 +231,7 @@ class MonsterDamageByPart {
     var damage = [MonsterDamage]()
 }
 
-class MonsterDamage: RowConvertible {
+class MonsterDamage: FetchableRecord {
     var bodyPart: String
     var cut: Int
     var impact: Int
@@ -257,7 +257,7 @@ class MonsterDamage: RowConvertible {
     }
 }
 
-class MonsterStatus: RowConvertible {
+class MonsterStatus: FetchableRecord {
     var row: Row
     var status: String
     var initial: Int

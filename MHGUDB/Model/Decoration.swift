@@ -7,7 +7,7 @@
 import Foundation
 import GRDB
 
-class Decoration: RowConvertible {
+class Decoration: FetchableRecord {
     var id: Int
     var name: String
     var icon: Icon?
@@ -37,7 +37,7 @@ class Decoration: RowConvertible {
     }
 }
 
-class DecorationSkillTree: RowConvertible {
+class DecorationSkillTree: FetchableRecord {
     var skillId: Int
     var name: String
     var points: Int
@@ -49,7 +49,7 @@ class DecorationSkillTree: RowConvertible {
     }
 }
 
-class DecorationComponent: RowConvertible {
+class DecorationComponent: FetchableRecord {
     var componentId: Int
     var name: String
     var icon: Icon?

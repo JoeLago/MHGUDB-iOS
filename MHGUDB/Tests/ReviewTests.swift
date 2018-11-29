@@ -8,7 +8,7 @@
 
 
 import XCTest
-@testable import MHGDB
+@testable import MHGUDB
 
 class ReviewTests: XCTestCase {
     

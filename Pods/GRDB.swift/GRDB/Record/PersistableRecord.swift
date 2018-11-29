@@ -1,3 +1,5 @@
+import Foundation
+
 extension Database.ConflictResolution {
     var invalidatesLastInsertedRowID: Bool {
         switch self {
@@ -12,12 +14,12 @@ extension Database.ConflictResolution {
 
 // MARK: - PersistenceError
 
-/// An error thrown by a type that adopts Persistable.
+/// An error thrown by a type that adopts PersistableRecord.
 public enum PersistenceError: Error, CustomStringConvertible {
     
-    /// Thrown by MutablePersistable.update() when no matching row could be
+    /// Thrown by MutablePersistableRecord.update() when no matching row could be
     /// found in the database.
-    case recordNotFound(MutablePersistable)
+    case recordNotFound(MutablePersistableRecord)
 }
 
 // CustomStringConvertible
@@ -25,8 +27,8 @@ extension PersistenceError {
     /// :nodoc:
     public var description: String {
         switch self {
-        case .recordNotFound(let persistable):
-            return "Not found: \(persistable)"
+        case .recordNotFound(let record):
+            return "Not found: \(record)"
         }
     }
 }
@@ -34,9 +36,9 @@ extension PersistenceError {
 // MARK: - PersistenceContainer
 
 /// Use persistence containers in the `encode(to:)` method of your
-/// persistable records:
+/// encodable records:
 ///
-///     struct Player : MutablePersistable {
+///     struct Player : MutablePersistableRecord {
 ///         var id: Int64?
 ///         var name: String?
 ///
@@ -64,7 +66,7 @@ public struct PersistenceContainer {
     /// It is undefined behavior to set different values for the same column.
     /// Column names are case insensitive, so defining both "name" and "NAME"
     /// is considered undefined behavior.
-    public subscript(_ column: Column) -> DatabaseValueConvertible? {
+    public subscript(_ column: ColumnExpression) -> DatabaseValueConvertible? {
         get { return self[column.name] }
         set { self[column.name] = newValue }
     }
@@ -81,7 +83,7 @@ public struct PersistenceContainer {
     ///     // Meh
     ///     var container = PersistenceContainer()
     ///     record.encode(to: container)
-    init(_ record: MutablePersistable) {
+    init(_ record: MutablePersistableRecord) {
         storage = [:]
         record.encode(to: &self)
     }
@@ -126,6 +128,15 @@ public struct PersistenceContainer {
         }
     }
     
+    // Returns nil if column is not defined
+    func value(forCaseInsensitiveColumn column: String) -> DatabaseValue? {
+        let lowercaseColumn = column.lowercased()
+        for (key, value) in storage where key.lowercased() == lowercaseColumn {
+            return value?.databaseValue ?? .null
+        }
+        return nil
+    }
+
     var isEmpty: Bool {
         return storage.isEmpty
     }
@@ -137,7 +148,7 @@ public struct PersistenceContainer {
 }
 
 extension Row {
-    convenience init(_ record: MutablePersistable) {
+    convenience init(_ record: MutablePersistableRecord) {
         self.init(PersistenceContainer(record))
     }
 
@@ -146,12 +157,12 @@ extension Row {
     }
 }
 
-// MARK: - MutablePersistable
+// MARK: - MutablePersistableRecord
 
-/// The MutablePersistable protocol uses this type in order to handle SQLite
+/// The MutablePersistableRecord protocol uses this type in order to handle SQLite
 /// conflicts when records are inserted or updated.
 ///
-/// See `MutablePersistable.persistenceConflictPolicy`.
+/// See `MutablePersistableRecord.persistenceConflictPolicy`.
 ///
 /// See https://www.sqlite.org/lang_conflict.html
 public struct PersistenceConflictPolicy {
@@ -168,8 +179,8 @@ public struct PersistenceConflictPolicy {
     }
 }
 
-/// Types that adopt MutablePersistable can be inserted, updated, and deleted.
-public protocol MutablePersistable : TableMapping {
+/// Types that adopt MutablePersistableRecord can be inserted, updated, and deleted.
+public protocol MutablePersistableRecord : TableRecord {
     /// The policy that handles SQLite conflicts when records are inserted
     /// or updated.
     ///
@@ -191,7 +202,7 @@ public protocol MutablePersistable : TableMapping {
     ///
     /// Primary key columns, if any, must be included.
     ///
-    ///     struct Player : MutablePersistable {
+    ///     struct Player : MutablePersistableRecord {
     ///         var id: Int64?
     ///         var name: String?
     ///
@@ -214,7 +225,7 @@ public protocol MutablePersistable : TableMapping {
     ///
     /// This method is optional: the default implementation does nothing.
     ///
-    ///     struct Player : MutablePersistable {
+    ///     struct Player : MutablePersistableRecord {
     ///         var id: Int64?
     ///         var name: String?
     ///
@@ -311,16 +322,137 @@ public protocol MutablePersistable : TableMapping {
     /// - returns: Whether the primary key matches a row in the database.
     /// - throws: A DatabaseError is thrown whenever an SQLite error occurs.
     func exists(_ db: Database) throws -> Bool
+    
+    // MARK: - Customizing the Format of Database Columns
+    
+    /// When the PersistableRecord type also adopts the standard Encodable
+    /// protocol, you can use this dictionary to customize the encoding process
+    /// into database rows.
+    ///
+    /// For example:
+    ///
+    ///     // A key that holds a encoder's name
+    ///     let encoderName = CodingUserInfoKey(rawValue: "encoderName")!
+    ///
+    ///     // A PersistableRecord + Encodable record
+    ///     struct Player: PersistableRecord, Encodable {
+    ///         // Customize the encoder name when encoding a database row
+    ///         static let databaseEncodingUserInfo: [CodingUserInfoKey: Any] = [encoderName: "Database"]
+    ///
+    ///         func encode(to encoder: Encoder) throws {
+    ///             // Print the encoder name
+    ///             print(encoder.userInfo[encoderName])
+    ///             ...
+    ///         }
+    ///     }
+    ///
+    ///     let player = Player(...)
+    ///
+    ///     // prints "Database"
+    ///     try player.insert(db)
+    ///
+    ///     // prints "JSON"
+    ///     let encoder = JSONEncoder()
+    ///     encoder.userInfo = [encoderName: "JSON"]
+    ///     let data = try encoder.encode(player)
+    static var databaseEncodingUserInfo: [CodingUserInfoKey: Any] { get }
+    
+    /// When the PersistableRecord type also adopts the standard Encodable
+    /// protocol, this method controls the encoding process of nested properties
+    /// into JSON database columns.
+    ///
+    /// The default implementation returns a JSONEncoder with the
+    /// following properties:
+    ///
+    /// - dataEncodingStrategy: .base64
+    /// - dateEncodingStrategy: .millisecondsSince1970
+    /// - nonConformingFloatEncodingStrategy: .throw
+    /// - outputFormatting: .sortedKeys (iOS 11.0+, macOS 10.13+, watchOS 4.0+)
+    ///
+    /// You can override those defaults:
+    ///
+    ///     struct Achievement: Encodable {
+    ///         var name: String
+    ///         var date: Date
+    ///     }
+    ///
+    ///     struct Player: Encodable, PersistableRecord {
+    ///         // stored in a JSON column
+    ///         var achievements: [Achievement]
+    ///
+    ///         static func databaseJSONEncoder(for column: String) -> JSONEncoder {
+    ///             let encoder = JSONEncoder()
+    ///             encoder.dateEncodingStrategy = .iso8601
+    ///             return encoder
+    ///         }
+    ///     }
+    static func databaseJSONEncoder(for column: String) -> JSONEncoder
+    
+    /// When the PersistableRecord type also adopts the standard Encodable
+    /// protocol, this property controls the encoding of date properties.
+    ///
+    /// Default value is .deferredToDate
+    ///
+    /// For example:
+    ///
+    ///     struct Player: PersistableRecord, Encodable {
+    ///         static let databaseDateEncodingStrategy: DatabaseDateEncodingStrategy = .timeIntervalSince1970
+    ///
+    ///         var name: String
+    ///         var registrationDate: Date // encoded as an epoch timestamp
+    ///     }
+    static var databaseDateEncodingStrategy: DatabaseDateEncodingStrategy { get }
+    
+    /// When the PersistableRecord type also adopts the standard Encodable
+    /// protocol, this property controls the encoding of UUID properties.
+    ///
+    /// Default value is .deferredToUUID
+    ///
+    /// For example:
+    ///
+    ///     struct Player: PersistableProtocol, Encodable {
+    ///         static let databaseUUIDEncodingStrategy: DatabaseUUIDEncodingStrategy = .string
+    ///
+    ///         // encoded in a string like "E621E1F8-C36C-495A-93FC-0C247A3E6E5F"
+    ///         var uuid: UUID
+    ///     }
+    static var databaseUUIDEncodingStrategy: DatabaseUUIDEncodingStrategy { get }
 }
 
-extension MutablePersistable {
+extension MutablePersistableRecord {
+    public static var databaseEncodingUserInfo: [CodingUserInfoKey: Any] {
+        return [:]
+    }
+    
+    public static func databaseJSONEncoder(for column: String) -> JSONEncoder {
+        let encoder = JSONEncoder()
+        encoder.dataEncodingStrategy = .base64
+        encoder.dateEncodingStrategy = .millisecondsSince1970
+        encoder.nonConformingFloatEncodingStrategy = .throw
+        if #available(watchOS 4.0, OSX 10.13, iOS 11.0, *) {
+            // guarantee some stability in order to ease record comparison
+            encoder.outputFormatting = .sortedKeys
+        }
+        return encoder
+    }
+    
+    public static var databaseDateEncodingStrategy: DatabaseDateEncodingStrategy {
+        return .deferredToDate
+    }
+    
+    public static var databaseUUIDEncodingStrategy: DatabaseUUIDEncodingStrategy {
+        return .deferredToUUID
+    }
+}
+
+extension MutablePersistableRecord {
     /// A dictionary whose keys are the columns encoded in the `encode(to:)` method.
     public var databaseDictionary: [String: DatabaseValue] {
         return PersistenceContainer(self).storage.mapValues { $0?.databaseValue ?? .null }
     }
 }
 
-extension MutablePersistable {
+extension MutablePersistableRecord {
     /// Describes the conflict policy for insertions and updates.
     ///
     /// The default value specifies ABORT policy for both insertions and
@@ -362,7 +494,7 @@ extension MutablePersistable {
     /// - throws: A DatabaseError is thrown whenever an SQLite error occurs.
     ///   PersistenceError.recordNotFound is thrown if the primary key does not
     ///   match any row in the database.
-    public func update<Sequence: Swift.Sequence>(_ db: Database, columns: Sequence) throws where Sequence.Element == Column {
+    public func update<Sequence: Swift.Sequence>(_ db: Database, columns: Sequence) throws where Sequence.Element: ColumnExpression {
         try update(db, columns: Set(columns.map { $0.name }))
     }
     
@@ -403,7 +535,7 @@ extension MutablePersistable {
     ///   PersistenceError.recordNotFound is thrown if the primary key does not
     ///   match any row in the database and record could not be updated.
     @discardableResult
-    public func updateChanges(_ db: Database, from record: MutablePersistable) throws -> Bool {
+    public func updateChanges(_ db: Database, from record: MutablePersistableRecord) throws -> Bool {
         let changedColumns = Set(databaseChanges(from: record).keys)
         if changedColumns.isEmpty {
             return false
@@ -437,11 +569,11 @@ extension MutablePersistable {
         return try performExists(db)
     }
     
-    // MARK: - Changes Tracking
+    // MARK: - Record Comparison
     
     /// Returns a boolean indicating whether this record and the other record
     /// have the same database representation.
-    public func databaseEqual(_ record: Self) -> Bool {
+    public func databaseEquals(_ record: Self) -> Bool {
         return databaseChangesIterator(from: record).next() == nil
     }
 
@@ -453,11 +585,11 @@ extension MutablePersistable {
     /// but also in terms of columns. When the two records don't define the
     /// same set of columns in their `encode(to:)` method, only the columns
     /// defined by the receiver record are considered.
-    public func databaseChanges(from record: MutablePersistable) -> [String: DatabaseValue] {
+    public func databaseChanges(from record: MutablePersistableRecord) -> [String: DatabaseValue] {
         return Dictionary(uniqueKeysWithValues: databaseChangesIterator(from: record))
     }
     
-    fileprivate func databaseChangesIterator(from record: MutablePersistable) -> AnyIterator<(String, DatabaseValue)> {
+    fileprivate func databaseChangesIterator(from record: MutablePersistableRecord) -> AnyIterator<(String, DatabaseValue)> {
         let oldContainer = PersistenceContainer(record)
         var newValueIterator = PersistenceContainer(self).makeIterator()
         return AnyIterator {
@@ -490,10 +622,10 @@ extension MutablePersistable {
     }
     
     /// Don't invoke this method directly: it is an internal method for types
-    /// that adopt MutablePersistable.
+    /// that adopt MutablePersistableRecord.
     ///
     /// performInsert() provides the default implementation for insert(). Types
-    /// that adopt MutablePersistable can invoke performInsert() in their
+    /// that adopt MutablePersistableRecord can invoke performInsert() in their
     /// implementation of insert(). They should not provide their own
     /// implementation of performInsert().
     public mutating func performInsert(_ db: Database) throws {
@@ -507,10 +639,10 @@ extension MutablePersistable {
     }
     
     /// Don't invoke this method directly: it is an internal method for types
-    /// that adopt MutablePersistable.
+    /// that adopt MutablePersistableRecord.
     ///
     /// performUpdate() provides the default implementation for update(). Types
-    /// that adopt MutablePersistable can invoke performUpdate() in their
+    /// that adopt MutablePersistableRecord can invoke performUpdate() in their
     /// implementation of update(). They should not provide their own
     /// implementation of performUpdate().
     ///
@@ -520,7 +652,7 @@ extension MutablePersistable {
     ///   PersistenceError.recordNotFound is thrown if the primary key does not
     ///   match any row in the database.
     public func performUpdate(_ db: Database, columns: Set<String>) throws {
-        guard let statement = try DAO(db, self).updateStatement(columns: columns, onConflict: type(of: self).persistenceConflictPolicy.conflictResolutionForUpdate) else {
+        guard let statement = try DAO(db, self).updateStatement(db, columns: columns, onConflict: type(of: self).persistenceConflictPolicy.conflictResolutionForUpdate) else {
             // Nil primary key
             throw PersistenceError.recordNotFound(self)
         }
@@ -531,10 +663,10 @@ extension MutablePersistable {
     }
     
     /// Don't invoke this method directly: it is an internal method for types
-    /// that adopt MutablePersistable.
+    /// that adopt MutablePersistableRecord.
     ///
     /// performSave() provides the default implementation for save(). Types
-    /// that adopt MutablePersistable can invoke performSave() in their
+    /// that adopt MutablePersistableRecord can invoke performSave() in their
     /// implementation of save(). They should not provide their own
     /// implementation of performSave().
     ///
@@ -560,10 +692,10 @@ extension MutablePersistable {
     }
     
     /// Don't invoke this method directly: it is an internal method for types
-    /// that adopt MutablePersistable.
+    /// that adopt MutablePersistableRecord.
     ///
     /// performDelete() provides the default implementation for deelte(). Types
-    /// that adopt MutablePersistable can invoke performDelete() in
+    /// that adopt MutablePersistableRecord can invoke performDelete() in
     /// their implementation of delete(). They should not provide their own
     /// implementation of performDelete().
     public func performDelete(_ db: Database) throws -> Bool {
@@ -576,10 +708,10 @@ extension MutablePersistable {
     }
     
     /// Don't invoke this method directly: it is an internal method for types
-    /// that adopt MutablePersistable.
+    /// that adopt MutablePersistableRecord.
     ///
     /// performExists() provides the default implementation for exists(). Types
-    /// that adopt MutablePersistable can invoke performExists() in
+    /// that adopt MutablePersistableRecord can invoke performExists() in
     /// their implementation of exists(). They should not provide their own
     /// implementation of performExists().
     public func performExists(_ db: Database) throws -> Bool {
@@ -592,7 +724,7 @@ extension MutablePersistable {
     
 }
 
-extension MutablePersistable {
+extension MutablePersistableRecord {
     
     // MARK: - Deleting All
     
@@ -607,23 +739,23 @@ extension MutablePersistable {
     }
 }
 
-extension MutablePersistable {
+extension MutablePersistableRecord {
     
     // MARK: - Deleting by Single-Column Primary Key
     
     /// Delete records identified by their primary keys; returns the number of
     /// deleted rows.
     ///
-    ///     // DELETE FROM players WHERE id IN (1, 2, 3)
+    ///     // DELETE FROM player WHERE id IN (1, 2, 3)
     ///     try Player.deleteAll(db, keys: [1, 2, 3])
     ///
-    ///     // DELETE FROM countries WHERE code IN ('FR', 'US', 'DE')
+    ///     // DELETE FROM country WHERE code IN ('FR', 'US', 'DE')
     ///     try Country.deleteAll(db, keys: ["FR", "US", "DE"])
     ///
     /// When the table has no explicit primary key, GRDB uses the hidden
     /// "rowid" column:
     ///
-    ///     // DELETE FROM documents WHERE rowid IN (1, 2, 3)
+    ///     // DELETE FROM document WHERE rowid IN (1, 2, 3)
     ///     try Document.deleteAll(db, keys: [1, 2, 3])
     ///
     /// - parameters:
@@ -643,16 +775,16 @@ extension MutablePersistable {
     /// Delete a record, identified by its primary key; returns whether a
     /// database row was deleted.
     ///
-    ///     // DELETE FROM players WHERE id = 123
+    ///     // DELETE FROM player WHERE id = 123
     ///     try Player.deleteOne(db, key: 123)
     ///
-    ///     // DELETE FROM countries WHERE code = 'FR'
+    ///     // DELETE FROM country WHERE code = 'FR'
     ///     try Country.deleteOne(db, key: "FR")
     ///
     /// When the table has no explicit primary key, GRDB uses the hidden
     /// "rowid" column:
     ///
-    ///     // DELETE FROM documents WHERE rowid = 1
+    ///     // DELETE FROM document WHERE rowid = 1
     ///     try Document.deleteOne(db, key: 1)
     ///
     /// - parameters:
@@ -669,7 +801,7 @@ extension MutablePersistable {
     }
 }
 
-extension MutablePersistable {
+extension MutablePersistableRecord {
     
     // MARK: - Deleting by Key
     
@@ -706,15 +838,15 @@ extension MutablePersistable {
     }
 }
 
-// MARK: - Persistable
+// MARK: - PersistableRecord
 
-/// Types that adopt Persistable can be inserted, updated, and deleted.
+/// Types that adopt PersistableRecord can be inserted, updated, and deleted.
 ///
 /// This protocol is intented for types that don't have an INTEGER PRIMARY KEY.
 ///
-/// Unlike MutablePersistable, the insert() and save() methods are not
+/// Unlike MutablePersistableRecord, the insert() and save() methods are not
 /// mutating methods.
-public protocol Persistable : MutablePersistable {
+public protocol PersistableRecord : MutablePersistableRecord {
     
     /// Notifies the record that it was succesfully inserted.
     ///
@@ -725,7 +857,7 @@ public protocol Persistable : MutablePersistable {
     /// This method is optional: the default implementation does nothing.
     ///
     /// If you need a mutating variant of this method, adopt the
-    /// MutablePersistable protocol instead.
+    /// MutablePersistableRecord protocol instead.
     ///
     /// - parameters:
     ///     - rowID: The inserted rowID.
@@ -772,7 +904,7 @@ public protocol Persistable : MutablePersistable {
     func save(_ db: Database) throws
 }
 
-extension Persistable {
+extension PersistableRecord {
     
     /// Notifies the record that it was succesfully inserted.
     ///
@@ -801,10 +933,10 @@ extension Persistable {
     // MARK: - Immutable CRUD Internals
     
     /// Don't invoke this method directly: it is an internal method for types
-    /// that adopt Persistable.
+    /// that adopt PersistableRecord.
     ///
     /// performInsert() provides the default implementation for insert(). Types
-    /// that adopt Persistable can invoke performInsert() in their
+    /// that adopt PersistableRecord can invoke performInsert() in their
     /// implementation of insert(). They should not provide their own
     /// implementation of performInsert().
     public func performInsert(_ db: Database) throws {
@@ -818,10 +950,10 @@ extension Persistable {
     }
     
     /// Don't invoke this method directly: it is an internal method for types
-    /// that adopt Persistable.
+    /// that adopt PersistableRecord.
     ///
     /// performSave() provides the default implementation for save(). Types
-    /// that adopt Persistable can invoke performSave() in their
+    /// that adopt PersistableRecord can invoke performSave() in their
     /// implementation of save(). They should not provide their own
     /// implementation of performSave().
     ///
@@ -844,19 +976,89 @@ extension Persistable {
             try insert(db)
         }
     }
+}
+
+
+// MARK: - DatabaseDateEncodingStrategy
+
+/// DatabaseDateEncodingStrategy specifies how PersistableRecord types that also
+/// adopt the standard Encodable protocol encode their date properties.
+///
+/// For example:
+///
+///     struct Player: PersistableRecord, Encodable {
+///         static let databaseDateEncodingStrategy: DatabaseDateEncodingStrategy = .timeIntervalSince1970
+///
+///         var name: String
+///         var registrationDate: Date // encoded as an epoch timestamp
+///     }
+public enum DatabaseDateEncodingStrategy {
+    /// The strategy that uses formatting from the Date structure.
+    ///
+    /// It encodes dates using the format "YYYY-MM-DD HH:MM:SS.SSS" in the
+    /// UTC time zone.
+    case deferredToDate
     
+    /// Encodes a Double: the number of seconds between the date and
+    /// midnight UTC on 1 January 2001
+    case timeIntervalSinceReferenceDate
+    
+    /// Encodes a Double: the number of seconds between the date and
+    /// midnight UTC on 1 January 1970
+    case timeIntervalSince1970
+    
+    /// Encodes an Int64: the number of seconds between the date and
+    /// midnight UTC on 1 January 1970
+    case secondsSince1970
+    
+    /// Encodes an Int64: the number of milliseconds between the date and
+    /// midnight UTC on 1 January 1970
+    case millisecondsSince1970
+    
+    /// Encodes dates according to the ISO 8601 and RFC 3339 standards
+    @available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
+    case iso8601
+    
+    /// Encodes a String, according to the provided formatter
+    case formatted(DateFormatter)
+    
+    /// Encodes the result of the user-provided function
+    case custom((Date) -> DatabaseValueConvertible?)
+}
+
+// MARK: - DatabaseUUIDEncodingStrategy
+
+/// DatabaseUUIDEncodingStrategy specifies how FetchableRecord types that also
+/// adopt the standard Encodable protocol encode their UUID properties.
+///
+/// For example:
+///
+///     struct Player: PersistableProtocol, Encodable {
+///         static let databaseUUIDEncodingStrategy: DatabaseUUIDEncodingStrategy = .string
+///
+///         // encoded in a string like "E621E1F8-C36C-495A-93FC-0C247A3E6E5F"
+///         var uuid: UUID
+///     }
+public enum DatabaseUUIDEncodingStrategy {
+    /// The strategy that uses formatting from the UUID type.
+    ///
+    /// It encodes UUIDs as 16-bytes data blobs.
+    case deferredToUUID
+    
+    /// Encodes UUIDs as strings such as "E621E1F8-C36C-495A-93FC-0C247A3E6E5F"
+    case string
 }
 
 // MARK: - DAO
 
-/// DAO takes care of Persistable CRUD
+/// DAO takes care of PersistableRecord CRUD
 final class DAO {
     
     /// The database
     let db: Database
     
     /// The record
-    let record: MutablePersistable
+    let record: MutablePersistableRecord
     
     /// DAO keeps a copy the record's persistenceContainer, so that this
     /// dictionary is built once whatever the database operation. It is
@@ -869,7 +1071,7 @@ final class DAO {
     /// The table primary key
     let primaryKey: PrimaryKeyInfo
     
-    init(_ db: Database, _ record: MutablePersistable) throws {
+    init(_ db: Database, _ record: MutablePersistableRecord) throws {
         let databaseTableName = type(of: record).databaseTableName
         let primaryKey = try db.primaryKey(databaseTableName)
         let persistenceContainer = PersistenceContainer(record)
@@ -894,7 +1096,7 @@ final class DAO {
     }
     
     /// Returns nil if and only if primary key is nil
-    func updateStatement(columns: Set<String>, onConflict: Database.ConflictResolution) throws -> UpdateStatement? {
+    func updateStatement(_ db: Database, columns: Set<String>, onConflict: Database.ConflictResolution) throws -> UpdateStatement? {
         // Fail early if primary key does not resolve to a database row.
         let primaryKeyColumns = primaryKey.columns
         let primaryKeyValues = primaryKeyColumns.map {
@@ -902,17 +1104,17 @@ final class DAO {
         }
         guard primaryKeyValues.contains(where: { !$0.isNull }) else { return nil }
         
-        let lowercasePersistentColumns = Set(persistenceContainer.columns.map { $0.lowercased() })
-        let lowercasePrimaryKeyColumns = Set(primaryKeyColumns.map { $0.lowercased() })
-        var updatedColumns: [String] = []
-        for column in columns {
-            let lowercaseColumn = column.lowercased()
-            // Don't update columns that are not present in the persistenceContainer
-            guard lowercasePersistentColumns.contains(lowercaseColumn) else { continue }
-            // Don't update primary key columns
-            guard !lowercasePrimaryKeyColumns.contains(lowercaseColumn) else { continue }
-            updatedColumns.append(column)
-        }
+        // Don't update columns not present in columns
+        // Don't update columns not present in the persistenceContainer
+        // Don't update primary key columns
+        let lowercaseUpdatedColumns = Set(columns.map { $0.lowercased() })
+            .intersection(persistenceContainer.columns.map { $0.lowercased() })
+            .subtracting(primaryKeyColumns.map { $0.lowercased() })
+        
+        var updatedColumns: [String] = try db
+            .columns(in: databaseTableName)
+            .map { $0.name }
+            .filter { lowercaseUpdatedColumns.contains($0.lowercased()) }
         
         if updatedColumns.isEmpty {
             // IMPLEMENTATION NOTE
@@ -925,6 +1127,7 @@ final class DAO {
             // including tables made of a single primary key column.
             updatedColumns = primaryKeyColumns
         }
+        
         let updatedValues = updatedColumns.map {
             persistenceContainer[caseInsensitive: $0]?.databaseValue ?? .null
         }
@@ -982,15 +1185,8 @@ private struct InsertQuery: Hashable {
     let tableName: String
     let insertedColumns: [String]
     
-    // Not generated by Swift 4.1
+    #if !swift(>=4.2)
     var hashValue: Int { return tableName.hashValue }
-    
-    #if !swift(>=4.1)
-    static func == (lhs: InsertQuery, rhs: InsertQuery) -> Bool {
-        if lhs.tableName != rhs.tableName { return false }
-        if lhs.onConflict != rhs.onConflict { return false }
-        return lhs.insertedColumns == rhs.insertedColumns
-    }
     #endif
 }
 
@@ -1023,16 +1219,8 @@ private struct UpdateQuery: Hashable {
     let updatedColumns: [String]
     let conditionColumns: [String]
     
-    // Not generated by Swift 4.1
+    #if !swift(>=4.2)
     var hashValue: Int { return tableName.hashValue }
-    
-    #if !swift(>=4.1)
-    static func == (lhs: UpdateQuery, rhs: UpdateQuery) -> Bool {
-        if lhs.tableName != rhs.tableName { return false }
-        if lhs.onConflict != rhs.onConflict { return false }
-        if lhs.updatedColumns != rhs.updatedColumns { return false }
-        return lhs.conditionColumns == rhs.conditionColumns
-    }
     #endif
 }
 

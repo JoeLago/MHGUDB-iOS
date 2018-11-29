@@ -7,7 +7,7 @@
 import Foundation
 import GRDB
 
-class Weapon: RowConvertible {
+class Weapon: FetchableRecord {
     
     enum WType: String {
         case greatSword = "Great Sword"

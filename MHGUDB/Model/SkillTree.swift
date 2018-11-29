@@ -7,7 +7,7 @@
 import Foundation
 import GRDB
 
-class SkillTree: RowConvertible {
+class SkillTree: FetchableRecord {
     var id: Int
     var name: String
     
@@ -33,7 +33,7 @@ class SkillTree: RowConvertible {
     }
 }
 
-class Skill: RowConvertible {
+class Skill: FetchableRecord {
     let name: String
     let description: String
     let points: Int
@@ -46,7 +46,7 @@ class Skill: RowConvertible {
 }
 
 
-class SkillItem: RowConvertible {
+class SkillItem: FetchableRecord {
     let itemId: Int
     let name: String
     let icon: Icon?

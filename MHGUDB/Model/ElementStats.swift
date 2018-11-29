@@ -17,7 +17,7 @@ class Elements {
     var poison = 0
 }
 
-class Resistances: Elements, RowConvertible {
+class Resistances: Elements, FetchableRecord {
     required init(row: Row) {
         super.init()
         fire = row["fire_res"]

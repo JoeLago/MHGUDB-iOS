@@ -10,16 +10,6 @@ public final class DatabaseFunction: Hashable {
     private struct Identity: Hashable {
         let name: String
         let nArg: Int32 // -1 for variadic functions
-        
-        #if !swift(>=4.1)
-        var hashValue: Int {
-            return name.hashValue ^ nArg.hashValue
-        }
-        
-        static func == (lhs: Identity, rhs: Identity) -> Bool {
-            return lhs.name == rhs.name && lhs.nArg == rhs.nArg
-        }
-        #endif
     }
     
     public var name: String { return identity.name }
@@ -82,7 +72,7 @@ public final class DatabaseFunction: Hashable {
     ///     let dbQueue = DatabaseQueue()
     ///     let fn = DatabaseFunction("mysum", argumentCount: 1, aggregate: MySum.self)
     ///     dbQueue.add(function: fn)
-    ///     try dbQueue.inDatabase { db in
+    ///     try dbQueue.write { db in
     ///         try db.execute("CREATE TABLE test(i)")
     ///         try db.execute("INSERT INTO test(i) VALUES (1)")
     ///         try db.execute("INSERT INTO test(i) VALUES (2)")
@@ -323,11 +313,17 @@ public final class DatabaseFunction: Hashable {
 }
 
 extension DatabaseFunction {
-    /// The hash value
+    #if swift(>=4.2)
+    /// :nodoc:
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(identity)
+    }
+    #else
     /// :nodoc:
     public var hashValue: Int {
         return identity.hashValue
     }
+    #endif
     
     /// Two functions are equal if they share the same name and arity.
     /// :nodoc:
@@ -357,7 +353,7 @@ extension DatabaseFunction {
 ///     let dbQueue = DatabaseQueue()
 ///     let fn = DatabaseFunction("mysum", argumentCount: 1, aggregate: MySum.self)
 ///     dbQueue.add(function: fn)
-///     try dbQueue.inDatabase { db in
+///     try dbQueue.write { db in
 ///         try db.execute("CREATE TABLE test(i)")
 ///         try db.execute("INSERT INTO test(i) VALUES (1)")
 ///         try db.execute("INSERT INTO test(i) VALUES (2)")
@@ -373,10 +369,10 @@ public protocol DatabaseAggregate {
     /// aggregate function.
     ///
     ///    -- One value
-    ///    SELECT maxLength(name) FROM players
+    ///    SELECT maxLength(name) FROM player
     ///
     ///    -- Two values
-    ///    SELECT maxFullNameLength(firstName, lastName) FROM players
+    ///    SELECT maxFullNameLength(firstName, lastName) FROM player
     ///
     /// This method is never called after the finalize() method has been called.
     mutating func step(_ dbValues: [DatabaseValue]) throws

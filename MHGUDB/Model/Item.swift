@@ -8,7 +8,7 @@ import Foundation
 import GRDB
 import UIKit
 
-class Item: RowConvertible {
+class Item: FetchableRecord {
     enum `Type`: String {
         case armor = "Armor", weapon = "Weapon", other
     }
@@ -62,7 +62,7 @@ class Item: RowConvertible {
     }
 }
 
-class ItemQuest: RowConvertible {
+class ItemQuest: FetchableRecord {
     let questId: Int
     let name: String
     let icon: Icon?
@@ -84,7 +84,7 @@ class ItemQuest: RowConvertible {
     }
 }
 
-class ItemLocation: RowConvertible {
+class ItemLocation: FetchableRecord {
     var id: Int
     var name: String
     var icon: Icon?
@@ -116,7 +116,7 @@ class ItemLocation: RowConvertible {
     }
 }
 
-class ItemMonster: RowConvertible {
+class ItemMonster: FetchableRecord {
     let id: Int
     let monsterId: Int
     let name: String
@@ -138,7 +138,7 @@ class ItemMonster: RowConvertible {
     }
 }
 
-class ItemComponent: RowConvertible {
+class ItemComponent: FetchableRecord {
     var id: Int
     var producedId: Int
     var name: String

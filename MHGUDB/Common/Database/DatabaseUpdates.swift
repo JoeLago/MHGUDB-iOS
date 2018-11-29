@@ -33,7 +33,7 @@ extension Database {
     }
 }
 
-private class Version: RowConvertible {
+private class Version: FetchableRecord {
     let version: Int
     required init(row: Row) {
         version = row["version"] ?? 0

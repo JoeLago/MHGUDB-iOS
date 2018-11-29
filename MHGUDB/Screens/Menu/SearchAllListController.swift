@@ -32,7 +32,7 @@ class SearchAllListController: DetailController  {
     var searchText: String? = nil
     var deferredSearch: String? = nil
     var searchRequest: SearchRequest? = nil
-    let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let spinner = UIActivityIndicatorView(style: .gray)
     
     override func viewDidLoad() {
         super.viewDidLoad()

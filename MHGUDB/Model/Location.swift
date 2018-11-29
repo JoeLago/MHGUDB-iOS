@@ -7,7 +7,7 @@
 import Foundation
 import GRDB
 
-class Location: RowConvertible {
+class Location: FetchableRecord {
     var id: Int
     var name: String
     var icon: Icon?
@@ -39,7 +39,7 @@ class Location: RowConvertible {
     }
 }
 
-class LocationMonster : RowConvertible {
+class LocationMonster : FetchableRecord {
     let monsterId: Int
     let monster: String?
     let icon: Icon?
@@ -63,7 +63,7 @@ class LocationMonster : RowConvertible {
     }
 }
 
-class LocationItem : RowConvertible {
+class LocationItem : FetchableRecord {
     var itemId: Int
     var name: String?
     var icon: Icon?

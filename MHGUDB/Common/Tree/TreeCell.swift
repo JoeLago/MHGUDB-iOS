@@ -20,7 +20,7 @@ class TreeCell<T, U: TreeCellView<T>>: UITableViewCell {
     var branchWidthConstraint: NSLayoutConstraint?
     var treeView = U()
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         setupViews()
     }

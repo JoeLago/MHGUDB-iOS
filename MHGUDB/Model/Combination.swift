@@ -7,7 +7,7 @@
 import Foundation
 import GRDB
 
-class Combination: RowConvertible {
+class Combination: FetchableRecord {
     var id: Int!
     var createdId: Int!
     var createdName: String!

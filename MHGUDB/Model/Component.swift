@@ -7,7 +7,7 @@
 import Foundation
 import GRDB
 
-class Component: RowConvertible {
+class Component: FetchableRecord {
     let id: Int
     let name: String
     let icon: Icon?

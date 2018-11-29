@@ -5,9 +5,9 @@
 
 
 import XCTest
-@testable import MHGDB
+@testable import MHGUDB
 
-class MHGDBTests: XCTestCase {
+class MHGUDBTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
