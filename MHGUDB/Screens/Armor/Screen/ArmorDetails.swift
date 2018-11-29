@@ -21,7 +21,7 @@ class ArmorDetails: DetailController, DetailScreen {
         addSimpleSection(data: [armor])
         addSimpleSection(data: armor.skills, title: "Skills") { SkillDetails(id: $0.skillId) }
         addCustomSection(title: "Resistances", data: [armor.resistances], cellType: ImageLabelCell.self)
-        addSimpleSection(data: armor.components, title: "Components") { ItemDetails(id: $0.id) }
+        addSimpleSection(data: armor.components, title: "Components") { ItemDetails(id: $0.itemId) }
     }
     
     required public init?(coder aDecoder: NSCoder) {

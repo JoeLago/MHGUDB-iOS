@@ -47,6 +47,11 @@ class Database {
             Log(error: "\(error)")
         }
     }
+
+    // TODO: kill all the other fetch functions
+    func fetch<T: FetchableRecord>(_ query: Query) -> [T] {
+        return fetch(query.query)
+    }
     
     func fetch<T: FetchableRecord>(_ query: String) -> T? {
         do {

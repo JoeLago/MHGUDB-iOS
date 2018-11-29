@@ -26,4 +26,14 @@ class Resistances: Elements, FetchableRecord {
         ice = row["ice_res"]
         dragon = row["dragon_res"]
     }
+
+    init(fire: Int, water: Int, thunder: Int, ice: Int, dragon: Int, poison: Int = 0) {
+        super.init()
+        self.fire = fire
+        self.water = water
+        self.thunder = thunder
+        self.ice = ice
+        self.dragon = dragon
+        self.poison = poison
+    }
 }

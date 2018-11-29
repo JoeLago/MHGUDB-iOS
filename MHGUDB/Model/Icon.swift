@@ -9,7 +9,7 @@
 import GRDB
 import UIKit
 
-struct Icon {
+struct Icon: Decodable {
     let name: String
     let color: Color?
 
@@ -55,7 +55,7 @@ struct Icon {
         return image
     }
 
-    enum Color: Int {
+    enum Color: Int, Decodable {
         case white, red, green, blue, yellow, purple, cyan, orange, pink, yellowGreen, grey, gold, teal, darkGreen, darkRed, darkBlue, darkPurple, rare1, rare2, rare3, rare4, rare5, rare6, rare7, rare8, rare9, rare10, rare11
 
         init(rarity: Int) {

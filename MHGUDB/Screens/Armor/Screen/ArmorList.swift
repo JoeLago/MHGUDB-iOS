@@ -25,9 +25,9 @@ class ArmorList: DetailController {
         })
         
         let slotButton = addButton(
-            title: slot.rawValue, options: Armor.Slot.allStringValues,
+            title: slot.rawValue, options: Armor.Slot.allCases.map { $0.rawValue },
             selected: { (index: Int, value: String) in
-                self.slot = Armor.Slot.forString(value) ?? .body
+                self.slot = Armor.Slot(rawValue: value) ?? .body
                 self.reloadData()
         })
         
