@@ -892,6 +892,24 @@
 			path = Bookmarks;
 			sourceTree = "<group>";
 		};
+		1433553D21BD1BCD00E32853 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				14A24D361EA9D05400755F6A /* Combination.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1433553E21BD1BDD00E32853 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				14A24D481EA9D05400755F6A /* CombinationCell.swift */,
+				14A24D491EA9D05400755F6A /* CombinationDetail.swift */,
+				14A24D4A1EA9D05400755F6A /* CombinationList.swift */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
 		1454955B1EA9CEC5004FA5FA = {
 			isa = PBXGroup;
 			children = (
@@ -1050,7 +1068,6 @@
 		14A24D341EA9D05400755F6A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				14A24D361EA9D05400755F6A /* Combination.swift */,
 				14A24D371EA9D05400755F6A /* Component.swift */,
 				14A24D381EA9D05400755F6A /* Decoration.swift */,
 				14A24D391EA9D05400755F6A /* Element.swift */,
@@ -1102,9 +1119,8 @@
 		14A24D471EA9D05400755F6A /* Combination */ = {
 			isa = PBXGroup;
 			children = (
-				14A24D481EA9D05400755F6A /* CombinationCell.swift */,
-				14A24D491EA9D05400755F6A /* CombinationDetail.swift */,
-				14A24D4A1EA9D05400755F6A /* CombinationList.swift */,
+				1433553D21BD1BCD00E32853 /* Models */,
+				1433553E21BD1BDD00E32853 /* Screen */,
 			);
 			path = Combination;
 			sourceTree = "<group>";

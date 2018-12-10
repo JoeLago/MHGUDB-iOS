@@ -54,18 +54,18 @@ class CombinationCell: CustomCell<CombinationCellModel> {
     
     func populate(combo: CombinationCellModel) {
         resultView.set(id: combo.combination.createdId,
-                       icon: combo.combination.createdIcon,
-                       name: combo.combination.createdName,
+                       icon: combo.combination.created.icon,
+                       name: combo.combination.created.name,
                        selected: combo.itemSelected)
         
         item1View.set(id: combo.combination.firstId,
-                      icon: combo.combination.firstIcon,
-                      name: combo.combination.firstName,
+                      icon: combo.combination.first.icon,
+                      name: combo.combination.first.name,
                       selected: combo.itemSelected)
         
         item2View.set(id: combo.combination.secondId,
-                      icon: combo.combination.secondIcon,
-                      name: combo.combination.secondName,
+                      icon: combo.combination.second.icon,
+                      name: combo.combination.second.name,
                       selected: combo.itemSelected)
     }
 }

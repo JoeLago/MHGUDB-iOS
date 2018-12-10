@@ -17,6 +17,6 @@ class CombinationList: DetailController {
 }
 
 extension Combination: DetailCellModel {
-    var primary: String? { return createdName }
-    var subtitle: String? { return firstName + " + " + secondName }
+    var primary: String? { return created.name }
+    var subtitle: String? { return first.name + " + " + second.name }
 }

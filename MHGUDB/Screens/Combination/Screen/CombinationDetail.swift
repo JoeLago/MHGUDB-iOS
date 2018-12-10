@@ -16,7 +16,7 @@ class CombinationDetails: DetailController, DetailScreen {
     init(_ combination: Combination) {
         id = combination.id
         super.init()
-        title = combination.createdName
+        title = combination.created.name
         addSimpleSection(data: [combination.created], title: "Created") { ItemDetails(id: $0.id) }
         addSimpleSection(data: [combination.first, combination.second], title: "Components") { ItemDetails(id: $0.id) }
     }

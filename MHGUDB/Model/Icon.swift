@@ -58,6 +58,7 @@ struct Icon: Decodable {
     enum Color: Int, Decodable {
         case white, red, green, blue, yellow, purple, cyan, orange, pink, yellowGreen, grey, gold, teal, darkGreen, darkRed, darkBlue, darkPurple, rare1, rare2, rare3, rare4, rare5, rare6, rare7, rare8, rare9, rare10, rare11
 
+        // Does it make more sense to have a RarityColor enum?
         init(rarity: Int) {
             switch rarity {
             case 1: self = .rare1
